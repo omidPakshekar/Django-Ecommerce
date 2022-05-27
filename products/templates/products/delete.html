@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+
+  <div  style="margin-left: 45%; margin-bottom: 500px;">
+    <form  action="." method="post">
+      {% csrf_token %}
+
+      <div  style="margin-top: 5px; margin-right: 2px;">
+        <button type="submit" style="background-color:red;" class="btn btn-dark" href="#">
+          حذف
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+{% endblock content %}

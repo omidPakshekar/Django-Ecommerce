@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+
+
+  <div class="row margin-3-col">
+    <div class="col-lg-12">
+      <p style="text-align:center; font-size: 1.3rem; color:#007b5e" class="font-Lalezar">دسته بندی مورد نظر را انتخاب کنید</p>
+    </div>
+    <div class="opct col-xlg-3 col-lg-3  col-md-6">
+      <a class="col-3-a " href="{% url 'products:add_villa' %}">
+        <img style="width: 100%;" src="{% static 'home/assets/photo/Villa-House-1.jpg' %}" alt="عکس ویلا">
+        <p class="font-Lalezar">ویلا</p>
+      </a>
+    </div>
+
+    <div  class="opct col-xlg-3 col-lg-3 col-md-6" >
+      <a class="col-3-a" href="{% url 'products:add_rhn' %}">
+        <img style="width: 100%;" src="{% static 'home/assets/photo/home3.jpg' %}" alt="عکس رهن و اجاره">
+        <p class="font-Lalezar">رهن </p>
+      </a>
+    </div>
+    <div  class="opct col-xlg-3 col-lg-3 col-md-6" >
+      <a class="col-3-a" href="{% url 'products:add_ejare' %}">
+        <img style="width: 100%;" src="{% static 'home/assets/photo/home3.jpg' %}" alt="عکس رهن و اجاره">
+        <p class="font-Lalezar"> اجاره </p>
+      </a>
+    </div>
+    <div class="opct col-xlg-3 col-lg-3 col-md-6">
+      <a class="col-3-a" href="{% url 'products:add_frosh' %}">
+        <img style="width: 100%;" src="{% static 'home/assets/photo/home.jpg' %}" alt="عکس فروش">
+        <p class="font-Lalezar">فروش</p>
+      </a>
+    </div>
+    <div class="opct col-xlg-3 col-lg-3 col-md-6">
+      <a class="col-3-a" href="{% url 'products:add_proje' %}">
+        <img style="width: 100%;" src="{% static 'home/assets/photo/proje1.jpg' %}" alt="عکس فروش">
+        <p class="font-Lalezar">پروژه مسکونی</p>
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock content %}

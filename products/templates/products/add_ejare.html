@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+  <form class="login100-form validate-form" method="POST" enctype="multipart/form-data" action=".">
+    {% csrf_token %}
+    
+    {% csrf_token %}
+    <div class="">
+    <div class="wrap-login100-form-btn">
+      <li class="ul-li font-Lalezar-li">
+          <div class="font-Lalezar-li" style="margin-top:30px;">
+            <p style="font-size:36px">اطلاعات را وارد کنید </p>
+          </div>
+      </li >
+      <li class="ul-li font-Lalezar-li">
+          <div class="font-Lalezar-li">
+            <p>{{form.name}} : نام محل</p>
+          </div>
+      </li >
+      <li class="ul-li font-Lalezar-li">
+          <div class="font-Lalezar-li">
+            <p>: آدرس</p>
+            <p>{{form.address}} </p>
+          </div>
+      </li >
+      <li class="ul-li font-Lalezar-li">
+          <div class="font-Lalezar-li">
+            <p>{{form.file_number}} : شماره فایل</p>
+          </div>
+      </li >
+      <li class="ul-li font-Lalezar-li">
+          <div class="font-Lalezar-li">
+            <p>{{form.pish}} : پول پیش</p>
+          </div>
+      </li >
+      <li class="ul-li font-Lalezar-li">
+          <div class="font-Lalezar-li">
+            <p>{{form.pol_mhn}} : هزینه اجاره ماهیانه</p>
+          </div>
+      </li >
+      <li class="ul-li font-Lalezar-li">
+          <div class="font-Lalezar-li">
+            <p>{{form.bedroom}} : تعداد اتاق خواب</p>
+          </div>
+      </li >
+      <li class="ul-li font-Lalezar-li">
+          <div class="font-Lalezar-li">
+            <p>{{form.year}} : سال ساخت</p>
+          </div>
+      </li >
+      <li class="ul-li font-Lalezar-li">
+          <div class="font-Lalezar-li">
+            <p>{{form.area}} : مساحت</p>
+          </div>
+      </li >
+
+        <li class="ul-li font-Lalezar-li">
+          <p> : پارکینگ</p>
+
+          <div   style="text-align: right; display: inline-flex;">
+            <p >{{form.parking}} دارد </p>
+            <p style="padding-left:22px; padding-right:22px; "> {{form.no_parking}} ندارد </p>
+
+          </div>
+        </li >
+        <li class="ul-li font-Lalezar-li">
+            <div class="font-Lalezar-li">
+              <p>: توضیحات</p>
+              <p>{{form.description}} </p>
+            </div>
+        </li >
+
+      <li class="ul-li font-Lalezar-li">
+          <div class="font-Lalezar-li">
+            <p>{{form.image}} : 1 عکس</p>
+          </div>
+      </li >
+      <li class="ul-li font-Lalezar-li">
+          <div class="font-Lalezar-li">
+            <p>{{form.image2}} : 2 عکس</p>
+          </div>
+      </li >
+      <li class="ul-li font-Lalezar-li">
+          <div class="font-Lalezar-li">
+            <p>{{form.image3}} : 3 عکس</p>
+          </div>
+      </li >
+      <li class="ul-li font-Lalezar-li">
+          <div class="font-Lalezar-li">
+            <p>{{form.image4}} : 4 عکس</p>
+          </div>
+      </li >
+      <li class="ul-li font-Lalezar-li">
+          <div class="font-Lalezar-li">
+            <p>{{form.image5}} : 5 عکس</p>
+          </div>
+      </li >
+      <li class="ul-li font-Lalezar-li">
+          <div class="font-Lalezar-li">
+            <p>{{form.image6}} : 6 عکس</p>
+          </div>
+      </li >
+      <li class="ul-li font-Lalezar-li">
+          <div class="font-Lalezar-li">
+            <p>{{form.image7}} : 7 عکس</p>
+          </div>
+      </li >
+      <li class="ul-li font-Lalezar-li">
+          <div class="font-Lalezar-li">
+            <p>{{form.image8}} : 8 عکس</p>
+          </div>
+      </li >
+      <li class="ul-li font-Lalezar-li">
+          <div class="font-Lalezar-li">
+            <p>{{form.image9}} : 9 عکس</p>
+          </div>
+      </li >
+      <li class="ul-li font-Lalezar-li">
+          <div class="font-Lalezar-li">
+            <button style="width:25%" type="submit" class="btn-product-box btn btn-light">
+              <span  style="color:black">اضافه کردن</span>
+            </button>
+          </div>
+      </li >
+
+
+    </div>
+  </div>
+  </form>
+</div>
+
+{% endblock content %}

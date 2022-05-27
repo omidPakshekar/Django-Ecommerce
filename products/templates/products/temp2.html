@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  <title>مسکن خونه به خونه| لیست</title>
+{% endblock title %}
+
+{% block content %}
+
+<div style="margin-top: 10%;" class="container">
+    <div class="row">
+      <div class="btn-collapse-cg col-sm-12 col-md-12">
+        <button class="openbtn" onclick="openNav()">فیلتر کردن ☰</button>
+      </div>
+      <div class="col-sm-12 col-lg-9 col-md-12">
+        <div class="row">
+          {% for object in object_list %}
+          <div class="col-list-object col-lg-6 col-md-6">
+              <a class="col-3-a" href="{{ object.get_absolute_url }}">
+                  <div class="image-text">
+                    <img src={{object.image.url}} alt="">
+                    <div class="bottom-right">{{object.name}}</div>
+                  </div>
+
+                  <div style="width: 100%;" class="product-box" > <!-- container -->
+                    <div>
+                      <p style="margin-right: 5px; font-size:1rem; color:  #000080; text-align: right; ">قیمت: ۴۰۰ میلیون</p>
+                      <p style="margin-right: 5px; font-size:1rem;  color: #000080; text-align: right;">قیمت هر متر مربع: ۴۰ میلیون</p>
+
+                    </div>
+                    <div class="p-list" style="width:100%; display: inline-flex;" >
+                        <p style="margin-left: 5%;">1111:متراژ</p>
+                        <p style="margin-left: 11%;"> 33 سال ساخت</p>
+                        <p style="margin-left: 14%;">  2 خوابه</p>
+                    </div>
+                    <div class="call-block" >
+                      <a class="btn btn-dark" href="tel:+980">تماس با ما</a>
+                      <p> مشاور ملک : فرزاد رافع</p>
+                    </div>
+
+                  </div>
+
+              </a>
+            </div>
+
+        {% endfor %}
+
+
+        </div> <!-- inner row -->
+      </div> <!-- col-md-8 -->
+
+      <div style="height: 20%;" class= "product-box product-box-display  col-sm-12 col-lg-3 col-md-12">
+        <h3 class="ul-li">دسته بندی</h3>
+            <ul>
+              <li class="ul-li"><a class="col-3-a a-hover" href="">خرید <i class="fa fa-angle-double-right"></i></a></li>
+                <li class="ul-li"><a class="col-3-a a-hover" href="">رهن و اجاره <i class="fa fa-angle-double-right"></i></a></li>
+                <li class="ul-li"><a class="col-3-a" href="">ویلا <i class="fa fa-angle-double-right"></i></a></li>
+                <li class="ul-li"><a class="col-3-a" href="">پروژه ساختمانی <i class="fa fa-angle-double-right"></i></a></li>
+                <li class="ul-li">
+                  <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                  <input type="number"  style="width: 20%;" class="qty-text" id="qty" step="1" min="1" max="300" name="quantity" value="1">
+                  <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                  :تعداد اتاق
+                </li>
+
+
+                <li class="ul-li">
+                  :قیمت
+                  <div style="display: inline-flex;">
+                    <div>
+                      <p>:(تا(تومان</p>
+                    <input type="text" style="width: 95%;" >
+                    </div>
+                    <div>
+                      <p>:(از(تومان</p>
+                    <input type="text" style="width: 95%;" >
+                    </div>
+                  </div>
+                </li >
+
+                <li class="ul-li">پارکینگ</li >
+                  <li class="ul-li">
+                    :متراژ
+                    <div style="display: inline-flex;">
+                      <div>
+                        <p>:تا</p>
+                      <input type="text" style="width: 95%;" >
+                      </div>
+                      <div>
+                        <p>:از</p>
+                        <input type="text" style="width: 95%;" >
+                      </div>
+                    </div>
+
+                  </li >
+                <li class="ul-li">  <button  type="button" class="btn-product-box btn btn-light">جست و جو کردن</button></li>
+              </div>
+            </ul>
+
+  </div> <!-- outter row -->
+  <div id="mySidebar" class="sidebar  ">
+    <h3 class="ul-li">دسته بندی</h3>
+        <ul class="sidebar-li-a">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+
+          <li class="ul-li"><a class="col-3-a a-hover" href="">خرید <i class="fa fa-angle-double-right"></i></a></li>
+            <li class="ul-li"><a class="col-3-a a-hover" href="">رهن و اجاره <i class="fa fa-angle-double9right"></i></a></li>
+            <li class="ul-li"><a class="col-3-a a-hover" href="">ویلا <i class="fa fa-angle-double-right"></i></a></li>
+            <li class="ul-li"><a class="col-3-a a-hover" href="">پروژه مسکونی <i class="fa fa-angle-double-right"></i></a></li>
+            <li class="ul-li">
+                <p>:قیمت</p>
+                  <div style="display: inline-flex;">
+                    <div>
+                      <p>:
+                        (تا(تومان</p>
+                    <input type="text" style="width: 95%;" >
+                    </div>
+                    <div>
+                      <p>:(از(تومان</p>
+                    <input type="text" style="width: 95%;" >
+                    </div>
+                  </div>
+            </li >
+            <li class="ul-li">
+              <p style="padding-left: 5px;;">:متراژ</p>
+              <div style="display: inline-flex;">
+                <div>
+                  <p>:تا</p>
+                <input type="text" style="width: 95%;" >
+                </div>
+                <div>
+                  <p>:از</p>
+                  <input type="text" style="width: 95%;" >
+                </div>
+              </div>
+            </li >
+            <li class="ul-li">
+              <span class="qty-minus" onclick="var effect = document.getElementById('qty1'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
+              <input type="number"  style="width: 8%;" class="qty-text" id="qty1" step="1" min="1" max="300" name="quantity" value="1">
+              <span class="qty-plus" onclick="var effect = document.getElementById('qty1'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
+              :تعداد اتاق
+            </li>
+            <li class="ul-li">پارکینگ</li >
+
+            <li class="ul-li">  <button type="button" class="btn-product-box btn btn-dark">جست و جو کردن</button></li>
+          </ul>
+        </div>
+  </div>
+
+<script>
+  function openNav() {
+    // document.getElementById("mySidebar").style.display = "block";
+
+    document.getElementById("mySidebar").style.width = "100%";
+    document.getElementById("main").style.marginRight = "250px";
+  }
+
+  function closeNav() {
+    // document.getElementById("mySidebar").style.display = "none";
+
+    document.getElementById("mySidebar").style.width = "0%";
+    document.getElementById("main").style.marginRight= "0";
+  }
+  </script>
+{% endblock content %}

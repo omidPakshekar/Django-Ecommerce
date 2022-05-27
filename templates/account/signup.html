@@ -1,0 +1,75 @@
+{% extends "account/base.html" %}
+{% load static %}
+
+{% block head_title %}ثبت نام کنید{% endblock %}
+
+{% block content %}
+
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100">
+      <div style="padding-top:0px; margin-bottom:30%; ">
+
+              {% if form.errors %}
+                {% for field in form %}
+                  {% for error in field.errors %}
+                      <strong style="color:red; font-size:14px; float: right; text-align:right; ">
+                        {% if error == "This password is entirely numeric."  %}
+                          پسورد باید ترکیبی از حرف و عدد باشد
+                        {% endif %}
+                        {% if error == "This password is too common."  %}
+                          بیش از 80 درصد مردم از این رمز عبور استفاده می کنند
+                        {% endif %}
+                        {% if error == "A user is already registered with this e-mail address."  %}
+                          کاربری قبلا با این ایمیل ثبت نام کرده است
+                        {% endif %}
+                        {% if error == "The password is too similar to the username."  %}
+                          رمز عبور با نام کاربری نباید تطابق داشته باشد
+                        {% endif %}
+                        {% if error == "The password is too similar to the email."  %}
+                          رمز عبور نباید با ایمیل تطابق داشته باشد
+                        {% endif %}
+                        {% if error == "This password is too short. It must contain at least 8 characters."  %}
+                          رمز عبور باید حداقل از 8 کارکتر تشکیل شده باشد
+                        {% endif %}
+                        {% if error == "CustomUser with this username already exists."  %}
+                          کاربری قبلا با این نام کاربری ثبت نام کرده است
+                        {% endif %}
+                      </strong>
+
+                    {% endfor %}
+                {% endfor %}
+
+              {% endif %}
+            </div>
+      <form class="login100-form validate-form" method="POST" action="." style="margin-top:10px;">
+        {% csrf_token %}
+        <span class="login100-form-title p-b-26">
+          ثبت نام کنید
+        </span>
+<!-- This password is too common. -->
+
+
+        {{form.as_p}}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        {% csrf_token %}
+        <div  style="text-align: center;" class=" main validate-input input100">
+          <a href="{{ login_url }}">قبلا عضو شده‌اید؟ رفتن به صفحه ورود </a>
+        </div>
+        <div style="margin-top:10px;" class="">
+          <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button class="login100-form-btn" type="submit">
+              ثبت نام
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

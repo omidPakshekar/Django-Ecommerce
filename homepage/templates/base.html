@@ -1,0 +1,182 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  {% block title %}
+  <title> مغازه علی قلی</title>
+  {% endblock title %}
+  <meta name="google-site-verification" content="i9iQKTYPEcPtDosFF1r3DvRnUg1Kc-AXT1KF-o4KwOA" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="title" content="مسکن دیوار به دیوار رشت , مسکن دیوار به دیوار  , مشاوراملاک رشت , مشاوراملاک در رشت" >
+   <meta name="robots" content="index , follow">
+   <meta name="description" content=" دیوار به دیوار , ویلا , رهن و اجاره ,  فروش , پروژه مسکونی , مشاوراملاک رشت , رشت , مسکن دیوار ,  رشت , استارا , کیاشهر , مشاوراملاک در رشت , مسکن دیوار به دیوار">
+  <meta charset="utf-8">
+  <meta name="googlebot">
+  <meta name="keywords" content="مسکن دیوار به دیوار , ویلا, رهن و اجاره,فروش , پروژه مسکونی , مشاوراملاک رشت , رشت , مسکن دیوار" />
+  <meta name="twitter:description" content=" دیوار به دیوار , ویلا , رهن و اجاره , فروش , پروژه مسکونی , مشاوراملاک رشت , رشت , مسکن دیوار , رشت , استارا , کیاشهر , مشاوراملاک در رشت , مسکن دیوار به دیوار">
+  <link rel="icon" href="{% static 'home/assets/photo/logo/logo.jpeg' %}">
+
+  <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'home/bootstrap/css/bootstrap.min.css' %}">
+  <script src="https://kit.fontawesome.com/983bc1b8f7.js" crossorigin="anonymous"></script>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Harmattan&family=Lateef&family=Mirza:wght@500&display=swap');
+  </style>
+
+  <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lateef&display=swap" rel="stylesheet">
+  {% block add_css %}
+
+  {% endblock add_css %}
+</head>
+<body>
+
+<header>
+  <nav class="nav-s navbar navbar-expand-lg navbar-light ">
+    <div class="logo " >
+      <a  href="{% url 'homepage:home-page' %}">
+          <img   class="rounded-circle" src="{% static 'home/assets/photo/logo/logo.jpeg' %}" alt="لوگو">
+      </a>
+
+    </div>
+   <div class="nav-margin">
+    <a  style="" class="nav-a-font nav-a navbar-brand change-nav-h1" href="{% url 'homepage:home-page' %}"><h1 style="font-size:1.2rem;">مغازه علی قلی</h1></a>
+  </div>
+    <button  style=" background-color: white!important;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="nav-margin-ul collapse navbar-collapse" id="navbarNav">
+          <ul style="float: right; text-align: right;" class="navbar-right navbar-nav navbar-reverse">
+            <li  class=" nav-item active">
+              <a  class="nav-a nav-a-ul-font nav-link" href="{% url 'homepage:home-page' %}"><span style="{% if slug == 'frosh' %}color: #e99c2e; {% endif %}"></span> </a>
+            </li>
+            <li class=" nav-item">
+              <a class="nav-a nav-a-ul-font nav-link" href="">
+                <span style="{% if slug == 'frosh' %}color: #e99c2e; {% endif %}">لپ تاپ</span>
+              </a>
+            </li>
+            <li class=" nav-item">
+              <a  class="nav-a nav-a-ul-font nav-link" href="">
+                <span style="{% if slug == 'rhn-va-ejare' %}color: #e99c2e; {% endif %}">موبایل</span>
+              </a>
+            </li>
+            <li class=" nav-item">
+              <a  class="nav-a nav-a-ul-font nav-link " href="">
+                 <span style="{% if slug == 'villa' %}color: #e99c2e; {% endif %}">ساعت</span>
+              </a>
+           </li>
+           <li class=" nav-item">
+                 <a class="nav-a nav-a-ul-font nav-link " href="">
+                   <span style="{% if slug == 'proje' %}color: #e99c2e; {% endif %}"> تبلت</span>
+                 </a>
+            </li>
+              <li class=" nav-item">
+                    <a class="nav-a nav-a-ul-font nav-link " href="">
+                      <span style="{% if slug == 'proje' %}color: #e99c2e; {% endif %}">ورود کارمندان</span>
+                    </a>
+              </li>
+          </ul>
+        </div>
+
+  </nav>
+</header>
+
+{% block content %}
+
+
+{% endblock content %}
+
+<footer style="margin-top: 90px" class="main-footer">
+  <!-- Footer -->
+  <section id="footer" class="r">
+    <div class="container" style=" margin-block-end: 0;">
+      <div style="flex-direction: row-reverse!important;" class="row text-center text-xs-center text-sm-left text-md-left">
+        <div class="col-xs-12 col-sm-4 col-md-4">
+          <h5 class="tx-r m-r-15">مغازه علی قلی</h5>
+          <ul class="tx-r list-unstyled quick-links" >
+            <li>
+              <a style="display: inline-flex;" href="">
+                <p class="m-r-5">لپ تاپ</p>
+                <i class="fa fa-angle-double-right"></i>
+              </a>
+            </li>
+            <li>
+              <a style="display: inline-flex;" href="">
+                <p class="m-r-5">موبایل</p>
+                <i class="fa fa-angle-double-right"></i>
+              </a>
+            </li>
+            <li>
+              <a style="display: inline-flex;" href="">
+                <p class="m-r-5">ساعت</p>
+                <i class="fa fa-angle-double-right"></i>
+              </a>
+            </li>
+
+            <li>
+              <a style="display: inline-flex;" href="">
+                <p class="m-r-5">تبلت</p>
+                <i class="fa fa-angle-double-right"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-xs-12 col-sm-4 col-md-4">
+          <ul class="tx-r list-unstyled quick-links" style="margin-top: 50px;">
+            <li>
+              <a style="display: inline-flex;" href="javascript:void();">
+                <p class="m-r-5">ادرس دفتر : فاز دو معلم بعد رشت بعد رشت بعد</p>
+              <i class="fa fa-angle-double-right"></i>
+              </a>
+           </li>
+
+            <li>
+              <a style="display: inline-flex;" href="tel:41545412121">
+                <p class="m-r-5"> شماره دفتر : 454454503</p>
+                <i class="fa fa-angle-double-right"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-xs-12 col-sm-4 col-md-4">
+          <ul  style="margin-top: 50px;" class="tx-r list-unstyled quick-links">
+            <li>
+              <a style="display: inline-flex;" href="tel:0938215544">
+                <p class="m-r-5">شماره تماس : 945454545546</p>
+                <i class="fa fa-angle-double-right"></i>
+              </a>
+            </li>
+            <li>
+              <a style="display: inline-flex;" href="https://www.instagram.com/divar_b_divar/">
+                <i style="font-size: 1.5rem;" class="fa fa-instagram"></i>
+                <p class="m-r-5">  ما را در اینستاگرام دنبال کنید</p>
+              </a>
+           </li>
+
+          </ul>
+        </div>
+
+
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+          <ul class="list-unstyled list-inline social text-center">
+          </ul>
+        </div>
+        </hr>
+      </div>
+  </section>
+</footer>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="{% static 'home/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+</html>

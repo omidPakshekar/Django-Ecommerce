@@ -1,0 +1,444 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %}
+  <title>مسکن دیوار به دیوار | جزییات</title>
+{% endblock title %}
+
+
+{% block add_css %}
+<link rel="stylesheet" href="{% static 'home/css/style.css' %}" type="text/css" media="screen" />
+
+<script defer src="{% static 'home/js/jquery.flexslider.js' %}"></script>
+<link rel="stylesheet" href="{% static 'home/css/flexslider.css' %}" type="text/css" media="screen" />
+{% endblock add_css %}
+
+
+{% block content %}
+<div class="container">
+
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+          <img class="modal-content" id="img01">
+        <div id="caption"></div>
+      </div>
+      <div style="margin-top: 20px;" class="container">
+          <div class="row">
+
+            <div class="col-sm-12 col-lg-8 col-md-6">
+              <section class="slider">
+                  <div id="slider" class="flexslider">
+                      <ul class="slides">
+                        <!-- 1  -->
+                        {% for i in image_list %}
+
+                          {% thumbnail i.image "500" as im %}
+                            <li>
+                              <img id="myImg" src="{{im.url}}" class="detail-img-one" />
+                            </li>
+                          {% endthumbnail %}
+                        {% endfor %}
+
+                     </ul>
+                  </div>
+                  <div id="carousel" class="flexslider">
+                      <ul class="slides">
+
+                        {% for i in image_list %}
+
+                          {% thumbnail i.image "500" as im %}
+                            <li>
+                              <img id="myImg" src="{{im.url}}" class="detail-img-one" />
+                            </li>
+                          {% endthumbnail %}
+                        {% endfor %}
+                      </ul>
+                  </div>
+              </section>
+
+            </div> <!-- col-md-6 -->
+
+
+
+            <div  class= " col-sm-12 col-lg-4 col-md-6">
+              <h4 style="padding-top: 10%;" class="h-detail-description font-Lalezar-h3"> {{object.name}} </h4>
+            <div >
+              <ul class="ul-li ul-detail-description font-mirza-li">
+                <li style="color: #007b5e;">{% if object.type == 'frosh' %} فروش {% elif object.type == 'villa' %} ویلا  {%  elif object.type == 'rhn'  %} رهن  {%  elif object.type == 'ejare'  %} اجاره {%  elif object.type == 'proje'  %} پروژه {% endif %}</li>
+                <li  style=" color:red "> {% if object.nastaghi %} نسقی است {% endif %}</li>
+                {% if object.type == 'frosh' or object.type == 'villa' or object.type == 'proje'   %}
+                  <li > {{object.price_met}} :قیمت هر متر مربع  <i class="fas fa-money-bill-wave"></i></li>
+                  <li >{{object.price}}: قیمت کلی  <i class="fas fa-money-bill-wave"></i></li>
+
+                {%  elif object.type == 'rhn'  %}
+                  <li >{{object.price}}: قیمت رهن <i class="fas fa-money-bill-wave"></i></li>
+                {%  elif object.type == 'ejare'  %}
+                  <li > {{object.price_met}} : اجاره ماهانه <i class="fas fa-money-bill-wave"></i></li>
+                  <li >{{object.price}}: پیش پول  <i class="fas fa-money-bill-wave"></i></li>
+                {% endif %}
+
+                <li >زمان ساخت: {% if object.year == 0 %}نوساز{% else %} {{object.year}} {% endif %}<i class="fa fa-calendar" aria-hidden="true"></i></li>
+                <li >آدرس: {{object.address}}</li>
+                <li style="color:#e99c2e"> {{object.file_number}} : شماره فایل </li>
+                <li> {% if object.type == 'villa' %} 09331316262 {% elif object.type == 'frosh' and object.nastaghi == True %} 09119343533 {%  elif object.type == 'frosh' %} 09114277731 {% else %} 01333265503 {% endif %} : شماره تماس مشاور  <i class="fas fa-phone"></i></li>
+                <div class="call-block" >
+                  <a class="btn btn-dark" href="tel:{% if object.type == 'villa' %} 09331316262 {% elif object.type == 'frosh' and object.nastaghi == True %} 09119343533 {%  elif object.type == 'frosh' %} 09114277731 {% else %} 01333265503 {% endif %}">تماس با مشاور فروش</a>
+                  <a style="margin-left: 5%; padding-left:10%; padding-right:10%;" class="btn btn-dark" href="tel:0133265303"> تماس با دفتر </a>
+
+                </div>
+                <li class="p-detail-description">توضیحات : {{object.description}} </li>
+                {% if user.is_authenticated %}
+                  <div  style="margin-top: 5px; margin-right: 2px;">
+                    <a  style="background-color:red;" class="btn btn-dark" href="{% url  'products:product-delete' id=object.id slug=object.slug %}">
+                      حذف
+                    </a>
+                  </div>
+                  <div  style="margin-top: 5px; margin-right: 2px;">
+                    <a  style="background-color:blue;" class="btn btn-dark" href="{% url  'products:product-update' id=object.id slug=object.slug %}">
+                      بروزرسانی
+                    </a>
+
+                  </div>
+                {% endif %}
+
+              </ul>
+            </div>
+            <div class="clearfix"> </div>
+            <!-- add google map -->
+            <iframe class="map-style" src="{{object.map}}"
+             frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0">
+           </iframe>
+
+          </div>
+            </div>
+
+              </div>
+             </div>
+            </div> <!-- outter row -->
+
+    <div id="container" class="detail-slider ">
+    <div id="main" role="main">
+        <section class="slider">
+          <div class="flexslider carousel">
+            <ul class="slides">
+              {% for object in lst %}
+
+              <li >
+                <a class="col-3-a img-slides" href="{{object.get_absolute_url}}">
+                  <img  src="{{object.image.url}}" alt="">
+                  <div style="width: 100%;" class="product-box " > <!-- container -->
+                    <p style="text-align: right; font-size:1.1rem;" class="font-mirza">{{object.name}}</p>
+                    <div class="p-list " >
+                      <div style="width: 100%;" class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4 p-font">
+                              <p >{{object.area}}:متراژ</p>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-5 p-font">
+                             <p > {% if object.year == 0 %} نوساز{% else %}  {{object.year}} سال ساخت   {% endif %}</p>
+                            </div>
+
+                            <div  class="col-xs-6 col-sm-6 col-md-6 col-lg-3 p-font">
+                              <p>اتاق:{{object.bedroom}}</p>
+                            </div>
+                            <div  class="col-xs-6 col-sm-6 col-md-6 col-lg-12 p-font">
+                              <p style="color:#007b5e;">{% if object.type == 'frosh' %} فروش {% elif object.type == 'villa' %} ویلا  {%  elif object.type == 'rhn'  %} رهن  {%  elif object.type == 'ejare'  %} اجاره {%  elif object.type == 'proje'  %} پروژه {% endif %}  </p>
+                            </div>
+                          </div><!-- row -->
+                        </div><!-- p-list-->
+                      </div>
+                    </a>
+                  </li>
+              {% endfor %}
+
+
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+
+</div>
+
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.min.js">\x3C/script>')</script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="{% static 'home/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script type="text/javascript">
+    $(function(){
+      SyntaxHighlighter.all();
+    });
+    $(window).load(function(){
+      $('#carousel').flexslider({
+        animation: "slide",
+        controlNav: false,
+        animationLoop: false,
+        slideshow: false,
+        itemWidth: 210,
+        itemMargin: 5,
+        asNavFor: '#slider'
+      });
+
+      $('#slider').flexslider({
+        animation: "slide",
+        controlNav: false,
+        animationLoop: false,
+        slideshow: false,
+        sync: "#carousel",
+
+        start: function(slider){
+          $('body').removeClass('loading');
+        }
+
+      });
+    });
+  </script>
+     <script type="text/javascript">
+        $(function(){
+          SyntaxHighlighter.all();
+        });
+        $(window).load(function(){
+          $('.flexslider').flexslider({
+            animation: "slide",
+            animationLoop: false,
+            itemWidth: 210,
+            itemMargin: 5,
+            minItems: 2,
+            maxItems: 4,
+            start: function(slider){
+              $('body').removeClass('loading');
+            }
+          });
+        });
+      </script>
+
+  <script>
+  // Get the modal
+    var modal = document.getElementById("myModal");
+
+    var sli = document.getElementById("slider");
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img = document.getElementById("myImg");
+    var img2 = document.getElementById("myImg2");
+    var img3 = document.getElementById("myImg3");
+    var img4 = document.getElementById("myImg4");
+    var img5 = document.getElementById("myImg5");
+    var img6 = document.getElementById("myImg6");
+    var img7 = document.getElementById("myImg7");
+    var img8 = document.getElementById("myImg8");
+    var img9 = document.getElementById("myImg9");
+    var img10 = document.getElementById("myImg10");
+    var img11 = document.getElementById("myImg11");
+    var img12 = document.getElementById("myImg12");
+    var img13 = document.getElementById("myImg13");
+    var img14 = document.getElementById("myImg14");
+    var img15 = document.getElementById("myImg15");
+    var img16 = document.getElementById("myImg16");
+    var img17 = document.getElementById("myImg17");
+    var img18 = document.getElementById("myImg18");
+    var img19 = document.getElementById("myImg19");
+    var img20 = document.getElementById("myImg20");
+
+
+    var modalImg = document.getElementById("img01");
+    var modalImg2= document.getElementById("img02");
+    var modalImg3= document.getElementById("img03");
+    var modalImg4 = document.getElementById("img04");
+    var modalImg5 = document.getElementById("img05");
+    var modalImg6 = document.getElementById("img06");
+    var modalImg7 = document.getElementById("img07");
+    var modalImg8 = document.getElementById("img08");
+    var modalImg9 = document.getElementById("img09");
+    var modalImg10 = document.getElementById("img10");
+    var modalImg11 = document.getElementById("img11");
+    var modalImg12 = document.getElementById("img12");
+    var modalImg13 = document.getElementById("img14");
+    var modalImg14 = document.getElementById("img15");
+    var modalImg15 = document.getElementById("img16");
+    var modalImg16 = document.getElementById("img17");
+    var modalImg17 = document.getElementById("img18");
+    var modalImg18 = document.getElementById("img19");
+    var modalImg19 = document.getElementById("img20");
+    var modalImg20 = document.getElementById("img21");
+
+    var captionText = document.getElementById("caption");
+
+    img.onclick = function(){
+      modal.style.display = "block";
+      modalImg.src = this.src;
+      $('.flex-nav-next').hide();
+      $('.flex-nav-prev').hide();
+      console.log($('flex-nav-next'));
+
+    }
+
+    if (img2 != null ){
+    img2.onclick = function(){
+      modal.style.display = "block";
+      modalImg.src = this.src;
+      $('.flex-nav-next').hide();
+      $('.flex-nav-prev').hide();
+    }
+  }
+  if (img3 != null ){
+  img3.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    $('.flex-nav-next').hide();
+    $('.flex-nav-prev').hide();
+  }
+}
+  if (img4 != null ){
+  img4.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    $('.flex-nav-next').hide();
+    $('.flex-nav-prev').hide();
+  }
+  }
+  if (img5 != null ){
+  img5.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    $('.flex-nav-next').hide();
+    $('.flex-nav-prev').hide();
+  }
+  }
+  if (img6 != null ){
+  img6.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    $('.flex-nav-next').hide();
+    $('.flex-nav-prev').hide();
+  }
+  }
+  if (img7 != null ){
+  img7.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    $('.flex-nav-next').hide();
+    $('.flex-nav-prev').hide();
+  }
+  }
+    if (img8 != null ){
+    img8.onclick = function(){
+      modal.style.display = "block";
+      modalImg.src = this.src;
+      $('.flex-nav-next').hide();
+      $('.flex-nav-prev').hide();
+    }
+    }
+    if (img9 != null ){
+    img9.onclick = function(){
+      modal.style.display = "block";
+      modalImg.src = this.src;
+      $('.flex-nav-next').hide();
+      $('.flex-nav-prev').hide();
+    }
+    }
+    if (img10 != null ){
+    img10.onclick = function(){
+      modal.style.display = "block";
+      modalImg.src = this.src;
+      $('.flex-nav-next').hide();
+      $('.flex-nav-prev').hide();
+    }
+  }
+  if (img11 != null ){
+  img11.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    $('.flex-nav-next').hide();
+    $('.flex-nav-prev').hide();
+  }
+  }
+  if (img12 != null ){
+  img12.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    $('.flex-nav-next').hide();
+    $('.flex-nav-prev').hide();
+  }
+  }
+  if (img13 != null ){
+  img13.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    $('.flex-nav-next').hide();
+    $('.flex-nav-prev').hide();
+  }
+  }
+  if (img14 != null ){
+  img14.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    $('.flex-nav-next').hide();
+    $('.flex-nav-prev').hide();
+  }
+  }
+  if (img15 != null ){
+  img15.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    $('.flex-nav-next').hide();
+    $('.flex-nav-prev').hide();
+  }
+  }
+  if (img16 != null ){
+  img16.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    $('.flex-nav-next').hide();
+    $('.flex-nav-prev').hide();
+  }
+  }
+  if (img17 != null ){
+  img17.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    $('.flex-nav-next').hide();
+    $('.flex-nav-prev').hide();
+  }
+  }
+  if (img18 != null ){
+  img18.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    $('.flex-nav-next').hide();
+    $('.flex-nav-prev').hide();
+  }
+  }
+  if (img19 != null ){
+  img19.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    $('.flex-nav-next').hide();
+    $('.flex-nav-prev').hide();
+  }
+  }
+  if (img20 != null ){
+  img20.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    $('.flex-nav-next').hide();
+    $('.flex-nav-prev').hide();
+  }
+  }
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      $('.flex-nav-next').show();
+      $('.flex-nav-prev').show();
+      modal.style.display = "none";
+    }
+  </script>
+
+  {% endblock content %}
