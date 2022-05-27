@@ -88,6 +88,12 @@
 
                 </div>
                 <li class="p-detail-description">توضیحات : {{object.description}} </li>
+                <form class="" action="{% url 'cart:cart_add' product_id=object.id %}" method="post">
+                  {{ cart_product_form }}
+                  {% csrf_token %}
+                  <input type="submit" name="" value="Add to Cart">
+                </form>
+
                 {% if user.is_authenticated %}
                   <div  style="margin-top: 5px; margin-right: 2px;">
                     <a  style="background-color:red;" class="btn btn-dark" href="{% url  'products:product-delete' id=object.id slug=object.slug %}">
@@ -226,45 +232,10 @@
     var img = document.getElementById("myImg");
     var img2 = document.getElementById("myImg2");
     var img3 = document.getElementById("myImg3");
-    var img4 = document.getElementById("myImg4");
-    var img5 = document.getElementById("myImg5");
-    var img6 = document.getElementById("myImg6");
-    var img7 = document.getElementById("myImg7");
-    var img8 = document.getElementById("myImg8");
-    var img9 = document.getElementById("myImg9");
-    var img10 = document.getElementById("myImg10");
-    var img11 = document.getElementById("myImg11");
-    var img12 = document.getElementById("myImg12");
-    var img13 = document.getElementById("myImg13");
-    var img14 = document.getElementById("myImg14");
-    var img15 = document.getElementById("myImg15");
-    var img16 = document.getElementById("myImg16");
-    var img17 = document.getElementById("myImg17");
-    var img18 = document.getElementById("myImg18");
-    var img19 = document.getElementById("myImg19");
-    var img20 = document.getElementById("myImg20");
-
 
     var modalImg = document.getElementById("img01");
     var modalImg2= document.getElementById("img02");
     var modalImg3= document.getElementById("img03");
-    var modalImg4 = document.getElementById("img04");
-    var modalImg5 = document.getElementById("img05");
-    var modalImg6 = document.getElementById("img06");
-    var modalImg7 = document.getElementById("img07");
-    var modalImg8 = document.getElementById("img08");
-    var modalImg9 = document.getElementById("img09");
-    var modalImg10 = document.getElementById("img10");
-    var modalImg11 = document.getElementById("img11");
-    var modalImg12 = document.getElementById("img12");
-    var modalImg13 = document.getElementById("img14");
-    var modalImg14 = document.getElementById("img15");
-    var modalImg15 = document.getElementById("img16");
-    var modalImg16 = document.getElementById("img17");
-    var modalImg17 = document.getElementById("img18");
-    var modalImg18 = document.getElementById("img19");
-    var modalImg19 = document.getElementById("img20");
-    var modalImg20 = document.getElementById("img21");
 
     var captionText = document.getElementById("caption");
 
@@ -284,150 +255,6 @@
       $('.flex-nav-next').hide();
       $('.flex-nav-prev').hide();
     }
-  }
-  if (img3 != null ){
-  img3.onclick = function(){
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    $('.flex-nav-next').hide();
-    $('.flex-nav-prev').hide();
-  }
-}
-  if (img4 != null ){
-  img4.onclick = function(){
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    $('.flex-nav-next').hide();
-    $('.flex-nav-prev').hide();
-  }
-  }
-  if (img5 != null ){
-  img5.onclick = function(){
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    $('.flex-nav-next').hide();
-    $('.flex-nav-prev').hide();
-  }
-  }
-  if (img6 != null ){
-  img6.onclick = function(){
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    $('.flex-nav-next').hide();
-    $('.flex-nav-prev').hide();
-  }
-  }
-  if (img7 != null ){
-  img7.onclick = function(){
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    $('.flex-nav-next').hide();
-    $('.flex-nav-prev').hide();
-  }
-  }
-    if (img8 != null ){
-    img8.onclick = function(){
-      modal.style.display = "block";
-      modalImg.src = this.src;
-      $('.flex-nav-next').hide();
-      $('.flex-nav-prev').hide();
-    }
-    }
-    if (img9 != null ){
-    img9.onclick = function(){
-      modal.style.display = "block";
-      modalImg.src = this.src;
-      $('.flex-nav-next').hide();
-      $('.flex-nav-prev').hide();
-    }
-    }
-    if (img10 != null ){
-    img10.onclick = function(){
-      modal.style.display = "block";
-      modalImg.src = this.src;
-      $('.flex-nav-next').hide();
-      $('.flex-nav-prev').hide();
-    }
-  }
-  if (img11 != null ){
-  img11.onclick = function(){
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    $('.flex-nav-next').hide();
-    $('.flex-nav-prev').hide();
-  }
-  }
-  if (img12 != null ){
-  img12.onclick = function(){
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    $('.flex-nav-next').hide();
-    $('.flex-nav-prev').hide();
-  }
-  }
-  if (img13 != null ){
-  img13.onclick = function(){
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    $('.flex-nav-next').hide();
-    $('.flex-nav-prev').hide();
-  }
-  }
-  if (img14 != null ){
-  img14.onclick = function(){
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    $('.flex-nav-next').hide();
-    $('.flex-nav-prev').hide();
-  }
-  }
-  if (img15 != null ){
-  img15.onclick = function(){
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    $('.flex-nav-next').hide();
-    $('.flex-nav-prev').hide();
-  }
-  }
-  if (img16 != null ){
-  img16.onclick = function(){
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    $('.flex-nav-next').hide();
-    $('.flex-nav-prev').hide();
-  }
-  }
-  if (img17 != null ){
-  img17.onclick = function(){
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    $('.flex-nav-next').hide();
-    $('.flex-nav-prev').hide();
-  }
-  }
-  if (img18 != null ){
-  img18.onclick = function(){
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    $('.flex-nav-next').hide();
-    $('.flex-nav-prev').hide();
-  }
-  }
-  if (img19 != null ){
-  img19.onclick = function(){
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    $('.flex-nav-next').hide();
-    $('.flex-nav-prev').hide();
-  }
-  }
-  if (img20 != null ){
-  img20.onclick = function(){
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    $('.flex-nav-next').hide();
-    $('.flex-nav-prev').hide();
-  }
   }
 
     // Get the <span> element that closes the modal

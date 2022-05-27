@@ -1,11 +1,89 @@
+{% extends 'base.html' %}
 {% load static %}
 {% load thumbnail %}
 
 {% block content %}
 
-<div class="container" >
+<div class="container">
+  <img src="{% static 'home/assets/photo/online_shop.jpg' %}" style="margin-top: 10px; width: 100%;" class="img-fluid" alt="Responsive image">
   <div class="row">
-      <h1>homepage</h1>
+    <div style="text-align:right;" class="col-md-4">
+      <a  class="img-ins-home" style="text-align:right;" href="https://www.instagram.com/divar_b_divar/">
+        <img class="img-ins" src="{% static 'home/assets/photo/instagram-pic.jpg' %}" alt="">
+      </a>
+      <p class="font-Lalezar" style="text-align:center; font-size:1.1rem;">ما را در اینستاگرام دنبال کنید</p>
+
+    </div>
+    <div style="text-align: right;" class="col-md-8 index-detail home-p">
+      <p>ادرس : فاز دو معلم بعد از میدان سرگل نبش ۱۶ متری</p>
+
+
+      <p><a style="color: #000080;">شماره دفتر : 01333265303</a></p>
+       <div class="small-text">
+        <p>مدیریت مغازه علی قلی : علی قلی </p>
+        <p>09114277731 مشاور ساعت و پیش ساعت  واحد ها مسکونی و تجاری :   میلاد گلفام</p>
+
+   </div>
+
+
+    </div>
+
+  </div>
+
+  <div class="row margin-3-col">
+    <div class="col-lg-12">
+      <p style="text-align:center; font-size: 1.3rem; color:#007b5e" class="font-Lalezar">برای مشاهده ارشیو ها انتخاب کنید</p>
+    </div>
+    <div class="opct col-xlg-3 col-lg-3  col-md-6">
+      <a class="col-3-a " href="{% url 'products:list-product-category' category_slug='villa' %}">
+        <img style="width: 100%;" src="{% static 'home/assets/photo/laptop_2.jpg' %}" alt="عکس لپ تاپ">
+        <p class="font-Lalezar">لپ تاپ</p>
+      </a>
+    </div>
+
+    <div  class="opct col-xlg-3 col-lg-3 col-md-6" >
+      <a class="col-3-a" href="{% url 'products:list-product-category' category_slug='rhn-va-ejare' %}">
+        <img style="width: 100%;" src="{% static 'home/assets/photo/home3.jpg' %}" alt="عکس موبایل">
+        <p class="font-Lalezar">موبایل</p>
+      </a>
+    </div>
+    <div class="opct col-xlg-3 col-lg-3 col-md-6">
+      <a class="col-3-a" href="{% url 'products:list-product-category' category_slug='frosh' %}">
+        <img style="width: 100%;" src="{% static 'home/assets/photo/watch_homepage.jpg' %}" alt="عکس ساعت">
+        <p class="font-Lalezar">ساعت</p>
+      </a>
+    </div>
+    <div class="opct col-xlg-3 col-lg-3 col-md-6">
+      <a class="col-3-a" href="{% url 'products:list-product-category' category_slug='proje' %}">
+        <img style="width: 100%;" src="{% static 'home/assets/photo/proje1.jpg' %}" alt="عکس ساعت">
+        <p class="font-Lalezar">تبلت</p>
+      </a>
+    </div>
+  </div>
+  <div style="margin-top: 40px;">
+   <h5 style="border-right: double; padding-right: 5px; color:#007b5e; font-size:1.5rem;" class="font-Lalezar tx-r">اخرین  محصولات</h5>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    {% for object in last_products %}
+    <div style="margin-top:5px;" class="col-list-object col-lg-4 col-md-4 col-sm-6">
+        <a class="col-3-a" href="{{ object.get_absolute_url }}">
+            <div class="image-text">
+              {% thumbnail object.product_image.first.image "300x300" as im %}
+              <img src="{{im.url}}" height="250px" alt="">
+              {% endthumbnail %}
+              <div  class="bottom-right">{{object.name}}</div>
+            </div>
+
+            <div style="width: 100%;" class="product-box" > <!-- container -->
+              <p class="font-mirza list-address" >   {{object.name}} </p>
+              <p>قیمت : {{object.price}} تومان</p>
+            </div>
+        </a>
+      </div>
+  {% endfor %}
   </div> <!-- row -->
 </div>
 

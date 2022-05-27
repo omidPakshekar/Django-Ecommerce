@@ -3,7 +3,7 @@ from django.views.generic import ( ListView, DetailView,
                     TemplateView, CreateView, UpdateView,DeleteView)
 from .models import Product, ProductImage, Category
 from django.urls import reverse_lazy
-
+from cart.forms import CartAddProductForm
 
 class ProductListView(ListView):
     template_name='products/list.html'
@@ -33,7 +33,8 @@ class ProductDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         id_ = self.kwargs.get("id")
         image_list = Product.objects.get(id=id_).product_image.all()
-        context.update({'image_list': image_list})
+        cart_product_form = CartAddProductForm()
+        context.update({'image_list': image_list, 'cart_product_form' : cart_product_form})
         return context
     #
     def get_object(self):

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block add_css %}
+  <link rel="stylesheet" href="{% static 'cart/css/cart_css.css' %}" type="text/css" media="screen" />
+{% endblock add_css %}
+
+
+{% block content %}
+    <!-- https://docs.djangoproject.com/en/4.0/ref/templates/builtins/ -->
+
+    <div class="container " style="margin-top: 20%; margin-bottom:20%;">
+
+      <table id="customers">
+        <tr>
+          <th>حذف از سبد</th>
+          <th>تغییر دادن تعداد</th>
+          <th>قیمت کلی</th>
+          <th>تعداد</th>
+          <th> قیمت هر واحد</th>
+          <th>اسم کالا</th>
+          <th>عکس</th>
+        </tr>
+        {% for item in cart %}
+          {% with product=item.product %}
+            <tr>
+              <td><a style="color:rgb(255, 99, 71); text-decoration:none;" href="{% url 'cart:cart_remove' product_id=product.id  %}">
+                <strong>حذف</strong>
+              </a></td>
+              <td><form class="" action="{% url 'cart:cart_add' product_id=product.id %}" method="post">
+                {{ item.update_quantity_form.quantity}}
+                {{ item.update_quantity_form.update }}
+                <input type="submit" name="" value="update">
+                {% csrf_token %}
+              </form></td>
+              <td>{{ item.total_price }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>{{ item.price }}</td>
+              <td>{{product.name}}</td>
+              <td ><a href="{{ product.get_absolute_url }}"><img style="width:90px;" src="{{product.product_image.first.image.url}}" alt=""></a></td>
+          </tr>
+        {% endwith %}
+      {% endfor %}
+      <tr>
+        <td>جمع کل</td>
+        <td colspan="4"></td>
+        <td class="num">${{cart.get_total_price}}</td>
+      </tr>
+      </table>
+
+    </div>
+
+
+{% endblock %}

@@ -9,15 +9,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="title" content="مسکن دیوار به دیوار رشت , مسکن دیوار به دیوار  , مشاوراملاک رشت , مشاوراملاک در رشت" >
    <meta name="robots" content="index , follow">
-   <meta name="description" content=" دیوار به دیوار , ویلا , رهن و اجاره ,  فروش , پروژه مسکونی , مشاوراملاک رشت , رشت , مسکن دیوار ,  رشت , استارا , کیاشهر , مشاوراملاک در رشت , مسکن دیوار به دیوار">
+   <meta name="description" content=" دیوار به دیوار , ویلا , رهن و اجاره ,  فروش , تبلت , مشاوراملاک رشت , رشت , مسکن دیوار ,  رشت , استارا , کیاشهر , مشاوراملاک در رشت , مسکن دیوار به دیوار">
   <meta charset="utf-8">
   <meta name="googlebot">
-  <meta name="keywords" content="مسکن دیوار به دیوار , ویلا, رهن و اجاره,فروش , پروژه مسکونی , مشاوراملاک رشت , رشت , مسکن دیوار" />
-  <meta name="twitter:description" content=" دیوار به دیوار , ویلا , رهن و اجاره , فروش , پروژه مسکونی , مشاوراملاک رشت , رشت , مسکن دیوار , رشت , استارا , کیاشهر , مشاوراملاک در رشت , مسکن دیوار به دیوار">
+  <meta name="keywords" content="مسکن دیوار به دیوار , ویلا, رهن و اجاره,فروش , تبلت , مشاوراملاک رشت , رشت , مسکن دیوار" />
+  <meta name="twitter:description" content=" دیوار به دیوار , ویلا , رهن و اجاره , فروش , تبلت , مشاوراملاک رشت , رشت , مسکن دیوار , رشت , استارا , کیاشهر , مشاوراملاک در رشت , مسکن دیوار به دیوار">
   <link rel="icon" href="{% static 'home/assets/photo/logo/logo.jpeg' %}">
 
   <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
   <link rel="stylesheet" href="{% static 'home/bootstrap/css/bootstrap.min.css' %}">
+  {% block add_css %}
+
+  {% endblock add_css %}
   <script src="https://kit.fontawesome.com/983bc1b8f7.js" crossorigin="anonymous"></script>
   <style>
   @import url('https://fonts.googleapis.com/css2?family=Harmattan&family=Lateef&family=Mirza:wght@500&display=swap');
@@ -25,9 +28,7 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Lateef&display=swap" rel="stylesheet">
-  {% block add_css %}
 
-  {% endblock add_css %}
 </head>
 <body>
 
@@ -71,8 +72,17 @@
                  </a>
             </li>
               <li class=" nav-item">
-                    <a class="nav-a nav-a-ul-font nav-link " href="">
-                      <span style="{% if slug == 'proje' %}color: #e99c2e; {% endif %}">ورود کارمندان</span>
+                    <a class="nav-a nav-a-ul-font nav-link" style="" href="{% url  'cart:cart_detail' %}">
+                      {% with total_items=cart|length %}
+                        {% if cart|length > 0 %}
+                          سبد خرید شما:
+                            <span style="color:#e99c2e;" >
+                              {{ total_items }} کالا , {{cart.get_total_price}}
+                            </span>
+                        {% else %}
+                          سبد خرید شما خالی است
+                        {% endif %}
+                      {% endwith %}
                     </a>
               </li>
           </ul>
