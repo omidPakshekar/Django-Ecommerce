@@ -12,6 +12,36 @@
 
 <script defer src="{% static 'home/js/jquery.flexslider.js' %}"></script>
 <link rel="stylesheet" href="{% static 'home/css/flexslider.css' %}" type="text/css" media="screen" />
+<style media="screen">
+  .comment {
+  	display: block;
+  	transition: all 1s;
+  }
+
+  button.primaryContained {
+  	background: #016ba8;
+  	color: #fff;
+  	padding: 10px 10px;
+  	border: none;
+  	margin-top: 0px;
+  	cursor: pointer;
+  	box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);
+  	transition: 1s all;
+
+  	font-size: 14px;
+  	border-radius: 5px;
+  }
+  button.primaryContained:hover {
+  	background: #9201A8;
+  }
+  .comment-box {
+    text-align:right;
+  }
+</style>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js'></script>
+<!-- jQuery -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+
 {% endblock add_css %}
 
 
@@ -44,12 +74,10 @@
                   </div>
                   <div id="carousel" class="flexslider">
                       <ul class="slides">
-
                         {% for i in image_list %}
-
                           {% thumbnail i.image "500" as im %}
                             <li>
-                              <img id="myImg" src="{{im.url}}" class="detail-img-one" />
+                              <img id="myImg" src="{{im.url}}" />
                             </li>
                           {% endthumbnail %}
                         {% endfor %}
@@ -65,118 +93,89 @@
               <h4 style="padding-top: 10%;" class="h-detail-description font-Lalezar-h3"> {{object.name}} </h4>
             <div >
               <ul class="ul-li ul-detail-description font-mirza-li">
-                <li style="color: #007b5e;">{% if object.type == 'frosh' %} فروش {% elif object.type == 'villa' %} ویلا  {%  elif object.type == 'rhn'  %} رهن  {%  elif object.type == 'ejare'  %} اجاره {%  elif object.type == 'proje'  %} پروژه {% endif %}</li>
-                <li  style=" color:red "> {% if object.nastaghi %} نسقی است {% endif %}</li>
-                {% if object.type == 'frosh' or object.type == 'villa' or object.type == 'proje'   %}
-                  <li > {{object.price_met}} :قیمت هر متر مربع  <i class="fas fa-money-bill-wave"></i></li>
-                  <li >{{object.price}}: قیمت کلی  <i class="fas fa-money-bill-wave"></i></li>
-
-                {%  elif object.type == 'rhn'  %}
-                  <li >{{object.price}}: قیمت رهن <i class="fas fa-money-bill-wave"></i></li>
-                {%  elif object.type == 'ejare'  %}
-                  <li > {{object.price_met}} : اجاره ماهانه <i class="fas fa-money-bill-wave"></i></li>
-                  <li >{{object.price}}: پیش پول  <i class="fas fa-money-bill-wave"></i></li>
-                {% endif %}
-
                 <li >زمان ساخت: {% if object.year == 0 %}نوساز{% else %} {{object.year}} {% endif %}<i class="fa fa-calendar" aria-hidden="true"></i></li>
-                <li >آدرس: {{object.address}}</li>
-                <li style="color:#e99c2e"> {{object.file_number}} : شماره فایل </li>
-                <li> {% if object.type == 'villa' %} 09331316262 {% elif object.type == 'frosh' and object.nastaghi == True %} 09119343533 {%  elif object.type == 'frosh' %} 09114277731 {% else %} 01333265503 {% endif %} : شماره تماس مشاور  <i class="fas fa-phone"></i></li>
+                <li >گارانتی اصالت فیزیکی و سلامت کالا</li>
+                {% if object.stock %}
+                  <li>{{object.stock}} : تعداد کالای موجود در انبار </li>
+                {% endif %}
+                {% if object.available %}
+                  <li>این کالا در انبار موجود است</li>
+                {% else %}
+                  <li>این کالا در انبار موجود نیست</li>
+                {% endif %}
+                <li>  01333354403 : شماره تماس مشاور  <i class="fas fa-phone"></i></li>
                 <div class="call-block" >
-                  <a class="btn btn-dark" href="tel:{% if object.type == 'villa' %} 09331316262 {% elif object.type == 'frosh' and object.nastaghi == True %} 09119343533 {%  elif object.type == 'frosh' %} 09114277731 {% else %} 01333265503 {% endif %}">تماس با مشاور فروش</a>
+                  <a class="btn btn-dark" href="tel: 01353445503">تماس با مشاور فروش</a>
                   <a style="margin-left: 5%; padding-left:10%; padding-right:10%;" class="btn btn-dark" href="tel:0133265303"> تماس با دفتر </a>
 
                 </div>
                 <li class="p-detail-description">توضیحات : {{object.description}} </li>
-                <form class="" action="{% url 'cart:cart_add' product_id=object.id %}" method="post">
-                  {{ cart_product_form }}
-                  {% csrf_token %}
-                  <input type="submit" name="" value="Add to Cart">
-                </form>
-
-                {% if user.is_authenticated %}
-                  <div  style="margin-top: 5px; margin-right: 2px;">
-                    <a  style="background-color:red;" class="btn btn-dark" href="{% url  'products:product-delete' id=object.id slug=object.slug %}">
-                      حذف
-                    </a>
-                  </div>
-                  <div  style="margin-top: 5px; margin-right: 2px;">
-                    <a  style="background-color:blue;" class="btn btn-dark" href="{% url  'products:product-update' id=object.id slug=object.slug %}">
-                      بروزرسانی
-                    </a>
-
-                  </div>
+                {% if object.stock != 0 and object.available  %}
+                  <form class="" action="{% url 'cart:cart_add' product_id=object.id %}" method="post">
+                    <input class="btn btn-dark" style="background-color:#04AA6D;" type="submit" name="" value="افزودن به سبد">
+                    <span style="font-size:18px;" class="ul-li font-mirza-li">عدد</span>
+                    {{ cart_product_form.quantity }}
+                    {% csrf_token %}
+                  </form>
                 {% endif %}
 
               </ul>
             </div>
             <div class="clearfix"> </div>
-            <!-- add google map -->
-            <iframe class="map-style" src="{{object.map}}"
-             frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0">
-           </iframe>
 
           </div>
             </div>
 
               </div>
              </div>
-            </div> <!-- outter row -->
-
-    <div id="container" class="detail-slider ">
-    <div id="main" role="main">
-        <section class="slider">
-          <div class="flexslider carousel">
-            <ul class="slides">
-              {% for object in lst %}
-
-              <li >
-                <a class="col-3-a img-slides" href="{{object.get_absolute_url}}">
-                  <img  src="{{object.image.url}}" alt="">
-                  <div style="width: 100%;" class="product-box " > <!-- container -->
-                    <p style="text-align: right; font-size:1.1rem;" class="font-mirza">{{object.name}}</p>
-                    <div class="p-list " >
-                      <div style="width: 100%;" class="row">
-                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4 p-font">
-                              <p >{{object.area}}:متراژ</p>
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-5 p-font">
-                             <p > {% if object.year == 0 %} نوساز{% else %}  {{object.year}} سال ساخت   {% endif %}</p>
-                            </div>
-
-                            <div  class="col-xs-6 col-sm-6 col-md-6 col-lg-3 p-font">
-                              <p>اتاق:{{object.bedroom}}</p>
-                            </div>
-                            <div  class="col-xs-6 col-sm-6 col-md-6 col-lg-12 p-font">
-                              <p style="color:#007b5e;">{% if object.type == 'frosh' %} فروش {% elif object.type == 'villa' %} ویلا  {%  elif object.type == 'rhn'  %} رهن  {%  elif object.type == 'ejare'  %} اجاره {%  elif object.type == 'proje'  %} پروژه {% endif %}  </p>
-                            </div>
-                          </div><!-- row -->
-                        </div><!-- p-list-->
-                      </div>
-                    </a>
-                  </li>
-              {% endfor %}
 
 
-            </ul>
-          </div>
-        </section>
-      </div>
-    </div>
+          <div class="container">
+            <div class="row comment-box">
+              <div class="col-2">
+              </div>
+              <div class="col-8">
+                <h5 style="font-weight:bold;">نظر کاربران</h5>
+                <div class="comment">
+                  {% for obj in product_comments %}
+                    <p>میگه : {{obj.comment_text}}   <strong>{{obj.user.username}}</strong>  </p>
+                  {% endfor %}
+                  {% if user.is_authenticated %}
+                    <form class="" action="." method="post">
+                      {% csrf_token %}
+                      {{product_comment_form.new_comment_text}}
+                      <button class='primaryContained float-right' type="submit">افزودن نظر</button>
+                      {% csrf_token %}
+                    </form>
+                  {% endif %}
+                </div><!--End Comment-->
+              </div><!--End col -->
+              <div class="col-2">
+              </div>
+            </div><!-- End row -->
+            <div class="row">
+              <div class="col-6">
+            </div><!-- End col -->
+            </div><!--End Row -->
+          </div><!--End Container -->
 
-</div>
 
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.min.js">\x3C/script>')</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js'></script>
+<!-- jQuery -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="{% static 'home/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 <script type="text/javascript">
+
     $(function(){
+
       SyntaxHighlighter.all();
     });
     $(window).load(function(){

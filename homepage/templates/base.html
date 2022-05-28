@@ -49,26 +49,26 @@
         <div class="nav-margin-ul collapse navbar-collapse" id="navbarNav">
           <ul style="float: right; text-align: right;" class="navbar-right navbar-nav navbar-reverse">
             <li  class=" nav-item active">
-              <a  class="nav-a nav-a-ul-font nav-link" href="{% url 'homepage:home-page' %}"><span style="{% if slug == 'frosh' %}color: #e99c2e; {% endif %}"></span> </a>
+              <a  class="nav-a nav-a-ul-font nav-link" href="{% url 'homepage:home-page' %}"><span style="color: #e99c2e;"></span> </a>
             </li>
             <li class=" nav-item">
-              <a class="nav-a nav-a-ul-font nav-link" href="">
-                <span style="{% if slug == 'frosh' %}color: #e99c2e; {% endif %}">لپ تاپ</span>
+              <a class="nav-a nav-a-ul-font nav-link" href="{% url 'products:list-product-category' category_slug='laptop' %}">
+                <span style="{% if slug == 'laptop' %}color: #e99c2e; {% endif %}">لپ تاپ</span>
               </a>
             </li>
             <li class=" nav-item">
-              <a  class="nav-a nav-a-ul-font nav-link" href="">
-                <span style="{% if slug == 'rhn-va-ejare' %}color: #e99c2e; {% endif %}">موبایل</span>
+              <a  class="nav-a nav-a-ul-font nav-link" href="{% url 'products:list-product-category' category_slug='mobile' %}">
+                <span style="{% if slug == 'mobile' %}color: #e99c2e; {% endif %}">موبایل</span>
               </a>
             </li>
             <li class=" nav-item">
-              <a  class="nav-a nav-a-ul-font nav-link " href="">
-                 <span style="{% if slug == 'villa' %}color: #e99c2e; {% endif %}">ساعت</span>
+              <a  class="nav-a nav-a-ul-font nav-link " href="{% url 'products:list-product-category' category_slug='watch' %}">
+                 <span style="{% if slug == 'watch' %}color: #e99c2e; {% endif %}">ساعت</span>
               </a>
            </li>
            <li class=" nav-item">
-                 <a class="nav-a nav-a-ul-font nav-link " href="">
-                   <span style="{% if slug == 'proje' %}color: #e99c2e; {% endif %}"> تبلت</span>
+                 <a class="nav-a nav-a-ul-font nav-link " href="{% url 'products:list-product-category' category_slug='tablet' %}">
+                   <span style="{% if slug == 'tablet' %}color: #e99c2e; {% endif %}"> تبلت</span>
                  </a>
             </li>
               <li class=" nav-item">
