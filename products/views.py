@@ -4,6 +4,7 @@ from django.views.generic import ( ListView, DetailView,
 from .models import Product, ProductImage, Category
 from django.urls import reverse_lazy
 from cart.forms import CartAddProductForm
+from products.forms import ProductPriceForm
 
 class ProductListView(ListView):
     template_name='products/list.html'
@@ -14,6 +15,8 @@ class ProductListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # Product.objects.get(id=1).product_image.all()[0].image
+        cart_product_form = ProductPriceForm()
+        context.update({'product_price_form' : cart_product_form})
         return context
 
     def get_queryset(self):

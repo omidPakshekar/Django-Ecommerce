@@ -3,7 +3,7 @@
 {% load thumbnail %}
 
 {% block title %}
-  <title> مسکن دیوار به دیوار | لیست </title>
+  <title> مغازه علی قلی | لیست</title>
 {% endblock title %}
 
 {% block add_css %}
@@ -14,10 +14,10 @@
 <div style="margin-top: 10%;" class="container">
     <div class="row">
       <div class="disp-none col-md-12 div-list-a" href="#" style="text-align:right; ">
-          <span><a style="{% if slug == 'frosh' %}color: #e99c2e; {% endif %}"  class="font-Lalezar" href=""> لپ تاپ </a></span>
-          <span><a style="{% if slug == 'villa' %}color: #e99c2e; {% endif %}" class="font-Lalezar" href=""> موبایل </a></span>
-          <span><a style="{% if slug == 'rhn-va-ejare' %}color: #e99c2e; {% endif %}" class="font-Lalezar" href="">ساعت </a></span>
-          <span><a style="{% if slug == 'proje' %}color: #e99c2e; {% endif %}" class="font-Lalezar" href="">تبلت</a></span>
+          <span><a style="{% if slug == 'laptop' %}color: #e99c2e; {% endif %}"  class="font-Lalezar" href="{% url 'products:list-product-category' category_slug='laptop' %}"> لپ تاپ </a></span>
+          <span><a style="{% if slug == 'mobile' %}color: #e99c2e; {% endif %}" class="font-Lalezar" href="{% url 'products:list-product-category' category_slug='mobile' %}"> موبایل </a></span>
+          <span><a style="{% if slug == 'watch' %}color: #e99c2e; {% endif %}" class="font-Lalezar" href="{% url 'products:list-product-category' category_slug='watch' %}">ساعت </a></span>
+          <span><a style="{% if slug == 'tablet' %}color: #e99c2e; {% endif %}" class="font-Lalezar" href="{% url 'products:list-product-category' category_slug='tablet' %}">تبلت</a></span>
       </div>
       <div class="btn-collapse-cg col-sm-12 col-md-12">
         <button style="font-size: 1rem;"  class="openbtn font-Lalezar" onclick="openNav()">فیلتر کردن ☰</button>
@@ -26,7 +26,7 @@
         <div class="row">
           {% if object_list %}
           {% for object in object_list %}
-          <div style="margin-top:5px;" class="col-list-object col-lg-6 col-md-6 col-sm-6">
+          <div style="margin-top:5px;" class="col-list-object col-lg-4 col-md-4 col-sm-6">
               <a class="col-3-a" href="{{ object.get_absolute_url }}">
                   <div class="image-text">
                     {% thumbnail object.product_image.first.image "300x300" as im %}
@@ -57,62 +57,23 @@
         <h3 class="ul-li font-Lalezar-h3">دسته بندی</h3>
             <ul>
               <form class="" action="." method="get">
-              <li class="ul-li "><a class="col-3-a a-hover font-Lalezar" href="">لپ تاپ <i class="fa fa-angle-double-right"></i></a></li>
-                <li class="ul-li"><a class="col-3-a a-hover  font-Lalezar" href="">ساعت <i class="fa fa-angle-double-right"></i></a></li>
-                <li class="ul-li"><a class="col-3-a  font-Lalezar" href="">موبایل <i class="fa fa-angle-double-right"></i></a></li>
-                <li class="ul-li"><a class="col-3-a  font-Lalezar" href="">تبلت <i class="fa fa-angle-double-right"></i></a></li>
-                <li class="ul-li font-Lalezar-li">
-                  <div style="flex-direction: row-reverse!important; display:inline-flex;">
-                    <p style="margin-left:5%;">:تعداد اتاق</p>
-                    <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                    {{form.bedroom}}
-                    <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                  </div>
-                </li>
-
-                {% if slug == 'rhn-va-ejare' %}
-                <li class="ul-li font-Lalezar-li">
-                  <p>: پیش پول</p>
-                  <div style="display: inline-flex;">
-                    <div class="font-Lalezar-li">
-                      <p>:(تا(تومان</p>
-                      {{form.pish2}}
-                    </div>
-                    <div class="font-Lalezar-li">
-                      <p>:(از(تومان</p>
-                      {{form.pish1}}
-                    </div>
-                  </div>
-                </li >
-
-                <li class="ul-li font-Lalezar-li">
-                  <p>: اجاره ماهانه</p>
-                  <div style="display: inline-flex;">
-                    <div class="font-Lalezar-li">
-                      <p>:(تا(تومان</p>
-                      {{form.pol_mhn2}}
-                    </div>
-                    <div class="font-Lalezar-li">
-                      <p>:(از(تومان</p>
-                      {{form.pol_mhn1}}
-                    </div>
-                  </div>
-                </li >
-                {% else %}
+              <li class="ul-li "><a class="col-3-a a-hover font-Lalezar" href="{% url 'products:list-product-category' category_slug='laptop' %}">لپ تاپ <i class="fa fa-angle-double-right"></i></a></li>
+                <li class="ul-li"><a class="col-3-a a-hover  font-Lalezar" href="{% url 'products:list-product-category' category_slug='watch' %}">ساعت <i class="fa fa-angle-double-right"></i></a></li>
+                <li class="ul-li"><a class="col-3-a  font-Lalezar" href="{% url 'products:list-product-category' category_slug='mobile' %}">موبایل <i class="fa fa-angle-double-right"></i></a></li>
+                <li class="ul-li"><a class="col-3-a  font-Lalezar" href="{% url 'products:list-product-category' category_slug='tablet' %}">تبلت <i class="fa fa-angle-double-right"></i></a></li>
                 <li class="ul-li font-Lalezar-li">
                   <p>: قیمت</p>
                   <div style="display: inline-flex;">
                     <div class="font-Lalezar-li">
                       <p>:(تا(تومان</p>
-                      {{form.pol2}}
+                      {{product_price_form.price1}}
                     </div>
                     <div class="font-Lalezar-li">
                       <p>:(از(تومان</p>
-                      {{form.pol1}}
+                      {{product_price_form.price2}}
                     </div>
                   </div>
                 </li >
-                {% endif %}
                   <button  type="submit" class="btn-product-box btn btn-light">جست و جو کردن</button>
                 </form>
               </div>
@@ -123,72 +84,26 @@
           <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
           <form  action="." method="get">
 
-            <li class="ul-li"><a class="col-3-a a-hover font-Lalezar" href="{% url 'products:list-product-category' category_slug='name1' %}">لپ تاپ <i class="fa fa-angle-double-right"></i></a></li>
-              <li class="ul-li"><a class="col-3-a a-hover font-Lalezar" href="">ساعت <i class="fa fa-angle-double-right"></i></a></li>
-              <li class="ul-li"><a class="col-3-a a-hover font-Lalezar" href="">موبایل <i class="fa fa-angle-double-right"></i></a></li>
-              <li class="ul-li"><a class="col-3-a  font-Lalezar" href="">تبلت <i class="fa fa-angle-double-right"></i></a></li>
+            <li class="ul-li"><a class="col-3-a a-hover font-Lalezar" href="{% url 'products:list-product-category' category_slug='laptop' %}">لپ تاپ <i class="fa fa-angle-double-right"></i></a></li>
+              <li class="ul-li"><a class="col-3-a a-hover font-Lalezar" href="{% url 'products:list-product-category' category_slug='watch' %}">ساعت <i class="fa fa-angle-double-right"></i></a></li>
+              <li class="ul-li"><a class="col-3-a a-hover font-Lalezar" href="{% url 'products:list-product-category' category_slug='mobile' %}">موبایل <i class="fa fa-angle-double-right"></i></a></li>
+              <li class="ul-li"><a class="col-3-a  font-Lalezar" href="{% url 'products:list-product-category' category_slug='tablet' %}">تبلت <i class="fa fa-angle-double-right"></i></a></li>
 
-              {% if slug == 'rhn-va-ejare' %}
-              <li class="ul-li font-Lalezar-li">
-                <p>: پیش پول</p>
-                <div style="display: inline-flex;">
-                  <div class="font-Lalezar-li">
-                    <p>:(تا(تومان</p>
-                    {{form.pish2}}
-                  </div>
-                  <div class="font-Lalezar-li">
-                    <p>:(از(تومان</p>
-                    {{form.pish1}}
-                  </div>
-                </div>
-              </li >
 
-              <li class="ul-li font-Lalezar-li">
-                <p>: اجاره ماهانه</p>
-                <div style="display: inline-flex;">
-                  <div class="font-Lalezar-li">
-                    <p>:(تا(تومان</p>
-                    {{form.pol_mhn2}}
-                  </div>
-                  <div class="font-Lalezar-li">
-                    <p>:(از(تومان</p>
-                    {{form.pol_mhn1}}
-                  </div>
-                </div>
-              </li >
-              {% else %}
               <li class="ul-li font-Lalezar-li">
                 <p>: قیمت</p>
                 <div style="display: inline-flex;">
                   <div class="font-Lalezar-li">
                     <p>:(تا(تومان</p>
-                    {{form.pol2}}
+                    {{product_price_form.price1}}
                   </div>
                   <div class="font-Lalezar-li">
                     <p>:(از(تومان</p>
-                    {{form.pol1}}
+                    {{product_price_form.price2}}
                   </div>
                 </div>
               </li >
-              {% endif %}
-
-
-              <li class="ul-li">
-                <p class="font-Lalezar" style="padding-left: 5px;;">:متراژ</p>
-                <div style="display: inline-flex;">
-                  <div>
-                    <p class="font-Lalezar">:تا</p>
-                    {{form.met2}}
-                  </div>
-                  <div>
-                    <p class="font-Lalezar">:از</p>
-                    {{form.met1}}
-                  </div>
-                </div>
-              </li >
-
               <li class="ul-li">  <button type="submit" class="btn-product-box btn btn-dark">جست و جو کردن</button></li>
-
           </form>
           </ul>
         </div>
