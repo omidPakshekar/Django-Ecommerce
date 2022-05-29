@@ -1,8 +1,51 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from products.models import Product
+from customers.models import CustomUser, Address
+from django.views.generic import ( ListView, DetailView,
+                    TemplateView, CreateView)
 from .cart import Cart
-from .forms import CartAddProductForm
+from .forms import *
+
+from django.views import View
+
+class OrderCreateView(TemplateView):
+    template_name = 'cart/create_order.html'
+    model = Product
+    address_form = AddressForm
+    # redirect = 'orders:order-created'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            user_ = CustomUser.objects.get(email=self.request.user)
+            address_list = Address.objects.filter(user = user_)
+            address_form =  AddressForm()
+
+            context.update({'address_list':address_list,'address_form':address_form})
+        else:
+            print('dumb')
+        return context
+
+    def post(self, request, *args, **kwargs):
+        print(self.request.POST)
+        if 'address_id' in self.request.POST:
+            print(Address.objects.get(id = int(self.request.POST['address_id'])))
+            
+
+        # form = self.form_class(request.POST)
+        # if form.is_valid():
+        #     # <process form cleaned data>
+        #     return HttpResponseRedirect('/success/')
+
+        return redirect('cart:checkout')
+
+    # def form_valid(self, form):
+    #     print(form.cleaned_data)
+    #     print("fjfjjjjjj")
+    #     form_ = form.save(commit=False)
+    #     form_.user = CustomUser.objects.get(email=self.request.user)
+    #     form_.save()
+    #     return redirect('cart:checkout')
 
 @require_POST
 def cart_add(request, product_id):

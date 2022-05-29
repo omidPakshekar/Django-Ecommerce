@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %}
+  <title>مغازه علی قلی جزییات</title>
+{% endblock title %}
+
+
+{% block add_css %}
+<link rel="stylesheet" href="{% static 'home/css/style.css' %}" type="text/css" media="screen" />
+
+<script defer src="{% static 'home/js/jquery.flexslider.js' %}"></script>
+<link rel="stylesheet" href="{% static 'home/css/flexslider.css' %}" type="text/css" media="screen" />
+<style media="screen">
+  .comment {
+  	display: block;
+  	transition: all 1s;
+  }
+
+  button.primaryContained {
+  	background: #016ba8;
+  	color: #fff;
+  	padding: 10px 10px;
+  	border: none;
+  	margin-top: 0px;
+  	cursor: pointer;
+  	box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);
+  	transition: 1s all;
+
+  	font-size: 14px;
+  	border-radius: 5px;
+  }
+  button.primaryContained:hover {
+  	background: #9201A8;
+  }
+  .comment-box {
+    text-align:right;
+  }
+  .form-margin {
+    margin-top:10px;
+  }
+  .new_address h5{
+    font-weight: bold;
+    margin-top:10px;
+    margin-bottom:10px;
+  }
+</style>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js'></script>
+<!-- jQuery -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+
+{% endblock add_css %}
+
+
+{% block content %}
+<div class="container">
+  <div class="row comment-box">
+    <div class="col-2">
+    </div>
+    <div class="col-8">
+      <h5 style="font-weight:bold;">ادرس</h5>
+      <div class="comment">
+        <div style="border-bottom:1px solid;">
+          <form class="" action="." method="post">
+            {% csrf_token %}
+            {% for obj in address_list %}
+            <div class="col-xs-3 ">
+                <label>
+                {{obj}}
+                <input type="radio" name="address_id" value="{{ obj.id }}">
+                </label>
+              </div>
+
+            {% endfor %}
+
+
+            <button style="margin-top:20px;" class='primaryContained float-right' type="submit">اضافه کردن ادرس</button>
+
+          </form>
+        </div>
+        <div class="new_address">
+          <h5>افزودن ادرس جدید</h5>
+
+          {% if user.is_authenticated %}
+            <form class="" action="." method="post">
+              {% csrf_token %}
+              <div class="form-margin">
+                {{address_form.firstname}}
+                <span style="margin-left:12px;">:  نام</span>
+              </div>
+              <div class="form-margin">
+                {{address_form.lastname}}
+                <span >:  نام خانوادگی</span>
+              </div>
+              <div class="form-margin">
+                {{address_form.phone_number}}
+                <span>: تلفن همراه</span>
+
+              </div>
+              <div class="form-margin">
+                {{address_form.province}}
+                <span>: استان</span>
+              </div>
+              <div class="form-margin">
+                {{address_form.city}}
+                <span></span>
+                 : شهر
+              </div>
+              <div class="form-margin">
+                {{address_form.postcode}}
+                <span></span>
+                 : کد پستی
+              </div>
+              <div class="form-margin">
+                {{address_form.address_text}}
+                : ادرس
+              </div>
+              <button style="margin-top:20px;" class='primaryContained float-right' type="submit">اضافه کردن ادرس</button>
+              {% csrf_token %}
+            </form>
+          {% endif %}
+        </div>
+      </div><!--End Comment-->
+    </div><!--End col -->
+    <div class="col-2">
+    </div>
+  </div><!-- End row -->
+  <div class="row">
+    <div class="col-6">
+  </div><!-- End col -->
+  </div><!--End Row -->
+</div><!--End Container -->
+
+{% endblock content %}

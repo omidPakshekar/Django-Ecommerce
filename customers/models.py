@@ -92,11 +92,12 @@ class Address(models.Model):
     user               = models.ForeignKey(CustomUser, blank=False, null=False, on_delete=models.CASCADE)
     firstname          =  models.CharField(max_length=30, blank=False, null=False)
     lastname           = models.CharField(max_length=30, blank=False, null=False)
-    address            = models.CharField(max_length=1200, blank=False, null=False)
-    country            = models.CharField(max_length=40, default='Iran', null=False)
+    address_text       = models.CharField(max_length=1200, blank=False, null=False)
+    country            = models.CharField(max_length=40, default='ایران', null=False)
     province           = models.CharField(max_length=100, blank=False, null=False)
     city               = models.CharField(max_length=100, blank=False, null=False)
     postcode           = models.CharField(max_length=12, blank=False, null=False)
+    phone_number       = models.CharField(max_length=11, blank=False, null=False)
 
     def __str__(self):
-        return self.user.username
+        return f"{self.province}_{self.city}_{self.address_text}"
