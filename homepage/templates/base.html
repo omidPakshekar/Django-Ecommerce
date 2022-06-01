@@ -28,15 +28,20 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Lateef&display=swap" rel="stylesheet">
+  <style media="screen">
+    * {
+      font-family: 'Lalezar', cursive;
+    }
 
+  </style>
 </head>
 <body>
 
 <header>
   <nav class="nav-s navbar navbar-expand-lg navbar-light ">
     <div class="logo " >
-      <a  href="{% url 'homepage:home-page' %}">
-          <img   class="rounded-circle" src="{% static 'home/assets/photo/logo/logo.jpeg' %}" alt="لوگو">
+      <a  href="{% url 'customers:profile' %}">
+          <img   class="rounded-circle" style="width:75%;" src="{% static 'home/assets/photo/profile_pic.jpg' %}" alt="لوگو">
       </a>
 
     </div>

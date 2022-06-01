@@ -34,4 +34,4 @@ def cart_detail(request):
                 'quantity' : item['quantity'],
                 'update'   : True
         })
-    return render(request, 'cart/cart_detail.html', {'cart' : cart})
+    return render(request, 'cart/cart_detail.html', {'cart' : cart, 'cart_len': len(cart)})

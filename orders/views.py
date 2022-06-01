@@ -7,6 +7,7 @@ from django.views.generic import ( ListView, DetailView,
 from cart.cart import Cart
 from .forms import AddressForm
 from .models import OrderItem, Order
+from .tasks import order_create_task
 
 class OrderCreateView(TemplateView):
     template_name = 'orders/create_order.html'
@@ -27,6 +28,7 @@ class OrderCreateView(TemplateView):
     def post(self, request, *args, **kwargs):
         if 'address_id' in request.POST:
             address_ = Address.objects.get(id = int(request.POST['address_id']))
+            print('1=',address_)
             user_ = CustomUser.objects.get(email = request.user)
             cart_ = Cart(request)
             total_price_ = cart_.get_total_price()
@@ -35,20 +37,14 @@ class OrderCreateView(TemplateView):
                 order_items.append(OrderItem.objects.create(product = i['product'], quantity = i['quantity']))
             order = Order.objects.create(user=user_, address=address_, total_price=total_price_)
             order.order_items.add(*order_items)
+
             cart_.clear()
-            print('afrin')
+            # order_create_task.delay(order.id)
+            return redirect('homepage:home-page')
             # total_price = car
         elif 'create_address' in request.POST:
             form_ = AddressForm(request.POST).save(commit=False)
             form_.user = CustomUser.objects.get(email=request.user)
             form_.save()
 
-        return redirect('orders:checkout')
-
-    # def form_valid(self, form):
-    #     print(form.cleaned_data)
-    #     print("fjfjjjjjj")
-    #     form_ = form.save(commit=False)
-    #     form_.user = CustomUser.objects.get(email=self.request.user)
-    #     form_.save()
-    #     return redirect('cart:checkout')
+        return redirect('orders:checkot')

@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %}
+  <title> پروفایل</title>
+{% endblock title %}
+
+{% block add_css %}
+<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/xb-titre" type="text/css"/>
+
+{% endblock add_css %}
+{% block content %}
+
+<div style="margin-top: 10%;" class="container">
+    <div class="row">
+      <div class="disp-none col-md-12 div-list-a" href="#" style="text-align:right; ">
+          <span><a style="{% if slug == 'tablet' %}color: #e99c2e; {% endif %}" class="font-Lalezar" href="{% url 'customers:profile'  %}">مشخصات</a></span>
+          <span><a style="{% if slug == 'laptop' %}color: #e99c2e; {% endif %}"  class="font-Lalezar" href="{% url 'products:list-product-category' category_slug='laptop' %}">تعویض رمزعبور</a></span>
+          <span><a style="{% if slug == 'mobile' %}color: #e99c2e; {% endif %}" class="font-Lalezar" href="{% url 'products:list-product-category' category_slug='mobile' %}"> پیگیری سفارش ها</a></span>
+          <span><a style="{% if slug == 'watch' %}color: #e99c2e; {% endif %}" class="font-Lalezar" href="{% url 'products:list-product-category' category_slug='watch' %}">تعویض عکس پروفایل </a></span>
+      </div>
+      <div class="btn-collapse-cg col-sm-12 col-md-12">
+        <button style="font-size: 1rem;"  class="openbtn font-Lalezar" onclick="openNav()">فیلتر کردن ☰</button>
+      </div>
+      <div class="col-sm-12 col-lg-9 col-md-12">
+        {% block content2 %}
+
+
+        {% endblock content2 %}
+
+      </div> <!-- col-md-8 -->
+
+      <div style="height: 20%;" class= "product-box product-box-display  col-sm-12 col-lg-3 col-md-12">
+        <h3 class="ul-li font-Lalezar-h3">دسته بندی</h3>
+            <ul>
+              <form class="" action="." method="get">
+              <li class="ul-li "><a class="col-3-a a-hover font-Lalezar" href="{% url 'customers:profile' %}">مشخصات<i class="fa fa-angle-double-right"></i></a></li>
+                <li class="ul-li"><a class="col-3-a a-hover  font-Lalezar" href="{% url 'products:list-product-category' category_slug='watch' %}">تعویض رمزعبور<i class="fa fa-angle-double-right"></i></a></li>
+                <li class="ul-li"><a class="col-3-a  font-Lalezar" href="{% url 'products:list-product-category' category_slug='mobile' %}">موبایل <i class="fa fa-angle-double-right"></i></a></li>
+                <li class="ul-li"><a class="col-3-a  font-Lalezar" href="{% url 'products:list-product-category' category_slug='tablet' %}">تبلت <i class="fa fa-angle-double-right"></i></a></li>
+                </form>
+              </div>
+  </div> <!-- outter row -->
+  <div id="mySidebar" class="sidebar  ">
+    <h3 style="font-size:2rem;" class="ul-li font-Lalezar">دسته بندی</h3>
+        <ul class="sidebar-li-a">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+          <form  action="." method="get">
+
+              <li class="ul-li"><a class="col-3-a a-hover font-Lalezar" href="{% url 'customers:profile' %}">مشخصات<i class="fa fa-angle-double-right"></i></a></li>
+              <li class="ul-li"><a class="col-3-a a-hover font-Lalezar" href="{% url 'products:list-product-category' category_slug='watch' %}">تعویض رمزعبور<i class="fa fa-angle-double-right"></i></a></li>
+              <li class="ul-li"><a class="col-3-a a-hover font-Lalezar" href="{% url 'products:list-product-category' category_slug='mobile' %}">پیگیری سفارش ها<i class="fa fa-angle-double-right"></i></a></li>
+              <li class="ul-li"><a class="col-3-a  font-Lalezar" href="{% url 'products:list-product-category' category_slug='tablet' %}">تعویض عکس پروفایل<i class="fa fa-angle-double-right"></i></a></li>
+            </form>
+          </ul>
+        </div>
+
+  {% if object_list %}
+
+    <div class="pagination page-div">
+      <span class="step-links">
+        {% if page_obj.has_next %}
+            &laquo;
+            <a class="page-first"  href="?page={{ page_obj.paginator.num_pages }}&{{ urlp  }}">اخرین صفحه</a>
+            <a class="page-next" href="?page={{ page_obj.next_page_number }}&{{ urlp  }}">صفحه بعدی</a>
+        {% endif %}
+
+
+        <span  class="current page-number">
+            صفحه {{ page_obj.number }} از {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_previous %}
+          <a class="page-prev" href="?page={{ page_obj.previous_page_number }}&{{ urlp  }}">صفحه قبلی</a>
+          <a href="?page=1&{{ urlp  }}" class="page-last">  اولین صفحه </a>
+          &raquo;
+        {% endif %}
+
+      </span>
+    </div>
+{% endif %}
+  </div> <!-- container -->
+
+
+<script>
+  function openNav() {
+    // document.getElementById("mySidebar").style.display = "block";
+
+    document.getElementById("mySidebar").style.width = "100%";
+    document.getElementById("main").style.marginRight = "250px";
+  }
+
+  function closeNav() {
+    // document.getElementById("mySidebar").style.display = "none";
+
+    document.getElementById("mySidebar").style.width = "0%";
+    document.getElementById("main").style.marginRight= "0";
+  }
+  </script>
+{% endblock content %}

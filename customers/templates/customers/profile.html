@@ -1,0 +1,15 @@
+{% extends 'customers_base.html' %}
+{% load static %}
+
+{% block content2 %}
+
+  <div class="" style="float:right; margin-right:10px; text-align:right;">
+    <p ><img style="width:120px;" src="{{user.profile_image.url}}" alt=""></p>
+    <p>{{user.email}} : ایمیل</p>
+    <p>{{user.username}} : نام کاربری </p>
+    <p>{{user.last_login}} : اخرین زمانی که وارد شدید</p>
+    <p>{{user.date_joined}} : تاریخ عضویت</p>
+    <p></p>
+  </div>
+
+{% endblock %}

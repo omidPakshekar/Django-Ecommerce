@@ -10,22 +10,34 @@
 {% block content %}
     <!-- https://docs.djangoproject.com/en/4.0/ref/templates/builtins/ -->
 
-    <div class="container " style="margin-top: 20%; margin-bottom:20%;">
+    <div class="container checkout" >
       <div class="row">
 
-      <div style="border: 1px solid; text-align:center;" class="col-lg-4 col-md-4">
+      <div style="" class="checkout-box  checkout-box-hide  col-lg-2 col-md-3">
         {% if user.is_authenticated %}
-        <div class="">
-
-            <span>قیمت کل {{cart.get_total_price}}</span>
-            <a class="btn btn-dark" href="{% url 'orders:checkout' %}">خرید را نهایی کن</a>
+        <div class="" style="padding:1rem;">
+            <div>قیمت کل : {{cart.get_total_price}}</div>
+            <div style="margin-top:10px;">
+              <span style="text-align:right;">{{cart_len}}</span>
+              :
+              <span>تعداد کالا  </span>
+            </div>
+            <a class="btn btn-dark" style="margin-top:10px"  href="{% url 'orders:checkout' %}">خرید را نهایی کن</a>
         </div>
         {% else %}
+        <div class="" style="padding:1rem;">
 
-          <a href="{% url 'account_login' %}">ابتدا وارد شوید</a>
+            <div>قیمت کل {{cart.get_total_price}}</div>
+            <div style="margin-top:10px;">
+              <span style="text-align:right;">{{cart_len}}</span>
+              :
+              <span>تعداد کالا  </span>
+            </div>
+            <a class="btn btn-dark" style="margin-top:10px" href="{% url 'account_login' %}">ابتدا وارد شوید</a>
+        </div>
         {% endif %}
       </div>
-        <div class="col-lg-8 col-md-8">
+        <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12">
           <table id="customers">
             <tr>
               <th>حذف از سبد</th>
@@ -59,7 +71,33 @@
           </table>
         </div>
 
+        <div style="margin-top:30px;" class=" col-sm-4 col-4  offset-sm-4 offset-4 checkout-box checkout-box-hide2">
+          {% if user.is_authenticated %}
+          <div class="" style="padding:1rem;">
+              <div>قیمت کل : {{cart.get_total_price}}</div>
+              <div style="margin-top:10px;">
+                <span style="text-align:right;">{{cart_len}}</span>
+                :
+                <span>تعداد کالا  </span>
+              </div>
+              <a class="btn btn-dark" style="margin-top:10px"  href="{% url 'orders:checkout' %}">خرید را نهایی کن</a>
+          </div>
+          {% else %}
+          <div class="" style="padding:1rem;">
+
+              <div>قیمت کل {{cart.get_total_price}}</div>
+              <div style="margin-top:10px;">
+                <span style="text-align:right;">{{cart_len}}</span>
+                :
+                <span>تعداد کالا  </span>
+              </div>
+              <a class="btn btn-dark" style="margin-top:10px" href="{% url 'account_login' %}">ابتدا وارد شوید</a>
+          </div>
+          {% endif %}
+        </div>
+
       </div>
+
 
 
     </div>

@@ -9,6 +9,7 @@
 #customers td, #customers th {
   border: 1px solid #ddd;
   padding: 8px;
+  text-align: right;
 }
 
 
@@ -23,4 +24,46 @@
   background-color: #04AA6D;
   color: white;
   text-align: right;
+}
+
+
+
+.checkout {
+  margin-top: 15%;
+  margin-bottom:20%;
+}
+
+.checkout-box{
+  border-radius:25px;
+  border: 1px solid;
+  text-align:center;
+  height:160px;
+  width:60px;
+  background-color:#DCDCDC;
+}
+
+.checkout-box-hide{
+  display: block;
+}
+.checkout-box-hide2{
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  #customers th, #customers tr{
+      font-size: 11px;
+  }
+  #customers{
+      width: 100%;
+  }
+  #customers td, #customers th {
+    padding: 3px;
+  }
+  .checkout-box-hide{
+    display: none;
+  }
+  .checkout-box-hide2{
+    display: block;
+  }
+
 }
