@@ -15,10 +15,10 @@
 <div style="margin-top: 10%;" class="container">
     <div class="row">
       <div class="disp-none col-md-12 div-list-a" href="#" style="text-align:right; ">
-          <span><a style="{% if slug == 'tablet' %}color: #e99c2e; {% endif %}" class="font-Lalezar" href="{% url 'customers:profile'  %}">مشخصات</a></span>
-          <span><a style="{% if slug == 'laptop' %}color: #e99c2e; {% endif %}"  class="font-Lalezar" href="{% url 'products:list-product-category' category_slug='laptop' %}">تعویض رمزعبور</a></span>
-          <span><a style="{% if slug == 'mobile' %}color: #e99c2e; {% endif %}" class="font-Lalezar" href="{% url 'products:list-product-category' category_slug='mobile' %}"> پیگیری سفارش ها</a></span>
-          <span><a style="{% if slug == 'watch' %}color: #e99c2e; {% endif %}" class="font-Lalezar" href="{% url 'products:list-product-category' category_slug='watch' %}">تعویض عکس پروفایل </a></span>
+          <span><a style="{% if slug == '' %}color: #e99c2e; {% endif %}" class="font-Lalezar" href="{% url 'customers:profile'  %}">مشخصات</a></span>
+          <span><a style="{% if slug == 'laptop' %}color: #e99c2e; {% endif %}"  class="font-Lalezar" href="{% url 'account_set_password' %}">تعویض رمزعبور</a></span>
+          <span><a style="{% if slug == 'mobile' %}color: #e99c2e; {% endif %}" class="font-Lalezar" href="{% url  'customers:customers-slug' slug='order-history' %}"> پیگیری سفارش ها</a></span>
+          <span><a style="{% if slug == 'watch' %}color: #e99c2e; {% endif %}" class="font-Lalezar" href="{% url  'customers:customers-slug' slug='change-profile-image' %}">تعویض عکس پروفایل </a></span>
       </div>
       <div class="btn-collapse-cg col-sm-12 col-md-12">
         <button style="font-size: 1rem;"  class="openbtn font-Lalezar" onclick="openNav()">فیلتر کردن ☰</button>
@@ -36,9 +36,9 @@
             <ul>
               <form class="" action="." method="get">
               <li class="ul-li "><a class="col-3-a a-hover font-Lalezar" href="{% url 'customers:profile' %}">مشخصات<i class="fa fa-angle-double-right"></i></a></li>
-                <li class="ul-li"><a class="col-3-a a-hover  font-Lalezar" href="{% url 'products:list-product-category' category_slug='watch' %}">تعویض رمزعبور<i class="fa fa-angle-double-right"></i></a></li>
-                <li class="ul-li"><a class="col-3-a  font-Lalezar" href="{% url 'products:list-product-category' category_slug='mobile' %}">موبایل <i class="fa fa-angle-double-right"></i></a></li>
-                <li class="ul-li"><a class="col-3-a  font-Lalezar" href="{% url 'products:list-product-category' category_slug='tablet' %}">تبلت <i class="fa fa-angle-double-right"></i></a></li>
+                <li class="ul-li"><a class="col-3-a a-hover  font-Lalezar" href="{% url 'account_set_password' %}">تعویض رمزعبور<i class="fa fa-angle-double-right"></i></a></li>
+                <li class="ul-li"><a class="col-3-a  font-Lalezar" href="{% url  'customers:customers-slug' slug='order-history' %}">پیگیری سفارش ها<i class="fa fa-angle-double-right"></i></a></li>
+                <li class="ul-li"><a class="col-3-a  font-Lalezar" href="{% url  'customers:customers-slug' slug='change-profile-image' %}">تعویض عکس پروفایل<i class="fa fa-angle-double-right"></i></a></li>
                 </form>
               </div>
   </div> <!-- outter row -->
@@ -49,9 +49,9 @@
           <form  action="." method="get">
 
               <li class="ul-li"><a class="col-3-a a-hover font-Lalezar" href="{% url 'customers:profile' %}">مشخصات<i class="fa fa-angle-double-right"></i></a></li>
-              <li class="ul-li"><a class="col-3-a a-hover font-Lalezar" href="{% url 'products:list-product-category' category_slug='watch' %}">تعویض رمزعبور<i class="fa fa-angle-double-right"></i></a></li>
-              <li class="ul-li"><a class="col-3-a a-hover font-Lalezar" href="{% url 'products:list-product-category' category_slug='mobile' %}">پیگیری سفارش ها<i class="fa fa-angle-double-right"></i></a></li>
-              <li class="ul-li"><a class="col-3-a  font-Lalezar" href="{% url 'products:list-product-category' category_slug='tablet' %}">تعویض عکس پروفایل<i class="fa fa-angle-double-right"></i></a></li>
+              <li class="ul-li"><a class="col-3-a a-hover font-Lalezar" href="{% url 'account_set_password' %}">تعویض رمزعبور<i class="fa fa-angle-double-right"></i></a></li>
+              <li class="ul-li"><a class="col-3-a a-hover font-Lalezar" href="{% url  'customers:customers-slug' slug='order-history' %}">پیگیری سفارش ها<i class="fa fa-angle-double-right"></i></a></li>
+              <li class="ul-li"><a class="col-3-a  font-Lalezar" href="{% url  'customers:customers-slug' slug='change-profile-image' %}">تعویض عکس پروفایل<i class="fa fa-angle-double-right"></i></a></li>
             </form>
           </ul>
         </div>

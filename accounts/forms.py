@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, SetPasswordForm
-from allauth.account.forms import LoginForm, SignupForm
+from allauth.account.forms import LoginForm, SignupForm, ChangePasswordForm
 from django.core.exceptions import ValidationError
 from allauth.utils import (
     get_request_param,
@@ -102,3 +102,38 @@ class CustomSignInForm(LoginForm):
                 ),
          )
         self.fields['remember'] = forms.BooleanField(label=': مرا به خاطر بسپار', initial=False, required=False )
+
+class CustomChangePasswordForm(ChangePasswordForm):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('label_suffix', '')
+        super(CustomChangePasswordForm, self).__init__(*args, **kwargs)
+        self.fields['oldpassword'] = forms.CharField(
+                widget=forms.PasswordInput(
+                    attrs={
+                        "style" :"text-align:center; ",
+                        "class" : " wrap-input100 main validate-input input100 ",
+                        "id" : "password1",
+                        "placeholder" :" کلمه عبور فعلی خود را وارد کنید",
+                     }
+                ),
+         )
+        self.fields['password1'] = forms.CharField(
+             widget=forms.PasswordInput(
+                 attrs={
+                     "style" :"text-align:center; ",
+                     "class" : " wrap-input100 main validate-input input100 ",
+                     "id" : "password1",
+                     "placeholder" :" رمز عبور جدید را وارد کنید",
+                  }
+             ),
+        )
+        self.fields['password2'] = forms.CharField(
+              widget=forms.PasswordInput(
+                  attrs={
+                      "style" :"text-align:center; ",
+                      "class" : " wrap-input100 main validate-input input100 ",
+                      "id" : "password1",
+                      "placeholder" :" رمز عبور جدید خود را تکرار کنید",
+                   }
+              ),
+        )

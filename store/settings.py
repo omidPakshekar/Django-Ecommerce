@@ -121,7 +121,7 @@ ACCOUNT_FORMS = {
     'login': 'accounts.forms.CustomSignInForm',
     'signup': 'accounts.forms.CustomSignupForm',
     'add_email': 'allauth.account.forms.AddEmailForm',
-    'change_password': 'allauth.account.forms.ChangePasswordForm',
+    'change_password': 'accounts.forms.CustomChangePasswordForm',
     'set_password': 'allauth.account.forms.SetPasswordForm',
     'reset_password': 'allauth.account.forms.ResetPasswordForm',
     'reset_password_from_key': 'allauth.account.forms.ResetPasswordKeyForm',
@@ -175,7 +175,7 @@ AUTHENTICATION_BACKENDS = (
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-LOGIN_REDIRECT_URL = '/' 
+LOGIN_REDIRECT_URL = '/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

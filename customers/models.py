@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 def get_profile_image_filepath(self, filename):
-    return f'profile_images/{self.pk}/{"profile_image.png"}'
+    return f'profile_images/{self.username + ".png"}'
 
 def get_default_profile_image():
     return "customers/default_profile_image.png"
