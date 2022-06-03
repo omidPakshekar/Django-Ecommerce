@@ -8,6 +8,8 @@ from cart.cart import Cart
 from .forms import AddressForm
 from .models import OrderItem, Order
 from .tasks import order_create_task
+from django.contrib.admin.views.decorators import staff_member_required
+
 
 class OrderCreateView(TemplateView):
     template_name = 'orders/create_order.html'
@@ -39,12 +41,22 @@ class OrderCreateView(TemplateView):
             order.order_items.add(*order_items)
 
             cart_.clear()
+            ##### asyncrohne task
             # order_create_task.delay(order.id)
+            # set the order in the session
+            request.session['order_id'] = order.id
+
             return redirect('homepage:home-page')
-            # total_price = car
+
         elif 'create_address' in request.POST:
             form_ = AddressForm(request.POST).save(commit=False)
             form_.user = CustomUser.objects.get(email=request.user)
             form_.save()
 
         return redirect('orders:checkot')
+
+@staff_member_required
+def admin_order_detail(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    print('*********')
+    return render(request, 'orders/admin_detail.html', {'order': order})

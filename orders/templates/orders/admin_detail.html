@@ -1,0 +1,42 @@
+{% extends 'admin/base_site.html' %}
+{% load static %}
+
+{% block extrastyle %}
+<style media="screen">
+    * {
+      font-family: 'Lalezar', cursive;
+    }
+</style>
+
+{% endblock %}
+
+{% block title %} Order {{ order.id }} {{ block.super }} {% endblock %}
+
+{% block breadcrumbs %}
+  <div class="breadcrumbs">
+      <a href="{% url 'admin:index' %}">Home</a> &rsaquo;
+      <a href="{% url 'admin:orders_order_changelist' %}">Orders</a> &rsaquo;
+      <a href="{% url 'admin:orders_order_change' 'order_id=order.id' %}">Order {{ order.id }}</a> &rsaquo;
+      Detail
+  </div>
+
+{% endblock %}
+
+{% block content %}
+  <div class="" style="text-align:right; margin-right:20px;" >
+      <h2 style="font-weight:bold;">Order {{order.id}}</h2>
+      <p style="color:DodgerBlue;"> {{order.user}} : کاربر </p>
+      <p> ادرس : {{order.address}} </p>
+      <p>قیمت کل : {{order.total_price}}</p>
+      <p>وضعیت مرسوله : {{order.order_status}}</p>
+      <p> {{order.created_time}} :  زمان ثبت سفارش </p>
+      <div class="">
+          <h3 style="font-weight:bold;">کالا های خریداری شده</h3>
+        {% for item in order.order_items.all %}
+          <p style="margin-top:10px; border-bottom:1px groove;">{{item.product}} * {{item.quantity}}</p>
+        {% endfor %}
+      </div>
+
+  </div>
+
+{% endblock content %}
