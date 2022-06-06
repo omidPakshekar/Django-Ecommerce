@@ -6,7 +6,7 @@ from django.views.generic import ( ListView, DetailView,
                     TemplateView, CreateView)
 from .cart import Cart
 from .forms import *
-
+from coupon.forms import CouponApplyForm
 
 @require_POST
 def cart_add(request, product_id):
@@ -26,6 +26,7 @@ def cart_remove(request, product_id):
     cart.remove(product)
     return redirect('cart:cart_detail')
 
+from orders.models import Order
 
 def cart_detail(request):
     cart = Cart(request)
@@ -34,4 +35,5 @@ def cart_detail(request):
                 'quantity' : item['quantity'],
                 'update'   : True
         })
-    return render(request, 'cart/cart_detail.html', {'cart' : cart, 'cart_len': len(cart)})
+    coupon_apply_form = CouponApplyForm()
+    return render(request, 'cart/cart_detail.html', {'cart' : cart, 'cart_len': len(cart), 'coupon_apply_form' : coupon_apply_form})

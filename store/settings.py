@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     'products',
     'orders',
     'cart',
-
+    'coupon',
     # third package party
     'django.contrib.sites',
     'allauth',

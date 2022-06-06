@@ -1,5 +1,4 @@
 from django.db import models
-# from django.contrib.auth.models import AbstractBaseuser, BaseUserManager
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 def get_profile_image_filepath(self, filename):
@@ -71,18 +70,6 @@ class CustomUser(AbstractBaseUser):
     	return True
 
 
-class DiscountCode(models.Model):
-    class Meta:
-        verbose_name_plural = "DiscountCode"
-
-    user               = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True, null=True)
-    code               = models.CharField(max_length=12, unique=True)
-    started_time       = models.DateTimeField()
-    expired_time       = models.DateTimeField()
-    percent            = models.PositiveIntegerField()
-
-    def __str__(self):
-        return str(self.percent) + "%"
 
 
 class Address(models.Model):

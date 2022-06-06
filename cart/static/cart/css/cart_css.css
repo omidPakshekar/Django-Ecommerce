@@ -22,7 +22,7 @@
   padding-bottom: 12px;
   text-align: left;
   background-color: #04AA6D;
-  color: white;
+  color: black;
   text-align: right;
 }
 
@@ -37,7 +37,6 @@
   border-radius:25px;
   border: 1px solid;
   text-align:center;
-  height:160px;
   width:60px;
   background-color:#DCDCDC;
 }

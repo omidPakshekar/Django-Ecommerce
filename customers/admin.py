@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from customers.models import CustomUser, Address, DiscountCode
+from customers.models import CustomUser, Address
 
 class CustomUserAdmin(UserAdmin):
     list_display = ('email', 'username', 'date_joined', 'last_login', 'is_admin', 'is_staff')
